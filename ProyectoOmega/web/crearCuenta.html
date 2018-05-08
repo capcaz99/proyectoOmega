@@ -6,13 +6,12 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Wizard DB</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Bienvenido! Por favor inicia sesión o crea una cuenta </h1>
-        <form action="loginServlet" method="POST">
+        <form action="welcome.jsp" method="POST">
             <table border="1">
                 <tbody>
                     <tr>
@@ -24,16 +23,15 @@ and open the template in the editor.
                         <td><input type="password" name="password" value="" /></td>
                     </tr>
                     <tr>
-                        <td><input type="submit" value="Login" /></td>
-                        <td><a href="crearCuenta.html">Crear una cuenta</a></td>
+                        <td>Repetir contraseña</td>
+                        <td><input type="password" name="password2" value="" /></td>
+                    </tr>
+                    <tr>
+                        <td><input type="submit" value="Crear" /></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>
-            
-            
         </form>
-        
-        
-        
     </body>
 </html>
