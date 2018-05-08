@@ -67,7 +67,9 @@ public class loginServlet extends HttpServlet {
                     mySession.setMaxInactiveInterval(20);
                     response.sendRedirect("home.jsp");
                     
-                       
+                   con.commit();
+                   con.close();
+                   
                    }else{
                        System.out.println("Contraseña - usuario incorrecto");
                        response.sendRedirect("index.html");
