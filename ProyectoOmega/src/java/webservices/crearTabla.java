@@ -60,7 +60,7 @@ public class crearTabla {
                     QueryString.append(nombre+" "+tipo+" ");
                 
                 for (int i = 0; i < caracteristicas.length; i++) {
-                    if(caracteristicas[i] != '-')
+                    if(caracteristicas[i] != '-'){
                         if(i == 0)
                             end = "primary key("+nombre+")";
                         else    
@@ -68,6 +68,7 @@ public class crearTabla {
                                 QueryString.append("not null ");
                             else
                                 QueryString.append("unique ");
+                    }
                 }
                 QueryString.append(", ");
             }
