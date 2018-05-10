@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/ProyectoOmega/crearTabla?WSDL" uri="src/conf/xml-resources/web-service-references/crearTabla/wsdl/localhost_8080/ProyectoOmega/crearTabla.wsdl"/>
-    <system systemId="http://localhost:8080/ProyectoOmega/crearTabla?xsd=1" uri="src/conf/xml-resources/web-service-references/crearTabla/wsdl/localhost_8080/ProyectoOmega/crearTabla.xsd_1.xsd"/>
-    <system systemId="http://localhost:8080/ProyectoOmega/crearTabla2?WSDL" uri="src/conf/xml-resources/web-service-references/crearTabla2/wsdl/localhost_8080/ProyectoOmega/crearTabla2.wsdl"/>
-    <system systemId="http://localhost:8080/ProyectoOmega/crearTabla2?xsd=1" uri="src/conf/xml-resources/web-service-references/crearTabla2/wsdl/localhost_8080/ProyectoOmega/crearTabla2.xsd_1.xsd"/>
-</catalog>
