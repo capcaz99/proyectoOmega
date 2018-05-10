@@ -34,7 +34,7 @@ public class probarWS {
         tipo.add("int");
         caract.add("-un20");
         caract.add("--n20");
-        caract.add("p-n");
+        caract.add("p--");
         
         System.out.println(crear(nombre,tipo,caract));
         
@@ -46,6 +46,8 @@ public class probarWS {
         webservices.CrearTabla port = service.getCrearTablaPort();
         return port.crear(nombreColumnas, tipoColumnas, caracterColumnas);
     }
+
+   
 
     
 

@@ -5,7 +5,13 @@
  */
 package webservices;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -26,7 +32,7 @@ public class crearTabla {
     @WebMethod(operationName = "crear")
     public Boolean crear(@WebParam(name = "nombreColumnas") ArrayList nombreColumnas, @WebParam(name = "tipoColumnas") ArrayList tipoColumnas, @WebParam(name = "caracterColumnas") ArrayList caracterColumnas) {
         
-         //try {
+         try {
             
             String nombre, tipo, nombreTabla, caract, tam, end = "";
             char[] caracteristicas;
@@ -40,7 +46,7 @@ public class crearTabla {
                 nombre = (String)nombreColumnas.get(j+1);
                 tipo   = (String)tipoColumnas.get(j);
                 caract = (String)caracterColumnas.get(j);
-                caracteristicas = caract.substring(0, 2).toCharArray();
+                caracteristicas = caract.substring(0, 3).toCharArray();
                 
                 if(tipo.equals("varchar"))
                     QueryString.append(nombre+" "+tipo+"("+caract.substring(3)+") ");
@@ -48,6 +54,7 @@ public class crearTabla {
                     QueryString.append(nombre+" "+tipo+" ");
                 
                 for (int i = 0; i < caracteristicas.length; i++) {
+                    System.out.println("j:"+j+" i:"+i+" :"+caracteristicas[i]);
                     if(caracteristicas[i] != '-'){
                         if(i == 0)
                             end = "primary key("+nombre+")";
@@ -62,22 +69,24 @@ public class crearTabla {
             }
             QueryString.append(end+")");
             
-             System.out.println(QueryString.toString());
-//            Class.forName("org.apache.derby.jdbc.ClientDriver");
-//            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/DBWizard;create=true;",
-//                    "root", "root");
-//            Statement query = con.createStatement();
-//            query.executeUpdate(QueryString.toString());
-//            
-//            con.commit();
-//            con.close();
-//            
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
-//        } catch (ClassNotFoundException ex) {
-//            Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+            System.out.println(QueryString.toString());
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/DBWizard;create=true;",
+                    "root", "root");
+            Statement query = con.createStatement();
+            query.executeUpdate(QueryString.toString());
+            
+             System.out.println("Query ejecutada");
+             
+            con.commit();
+            con.close();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
+        }
          return true;
         
         
