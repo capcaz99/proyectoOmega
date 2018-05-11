@@ -104,7 +104,7 @@ public class registros {
                     "root", "root");
             Statement query = con.createStatement();
             
-            StringBuilder QueryString = new StringBuilder("UPDATEV " + nombreTabla + "SET ");
+            StringBuilder QueryString = new StringBuilder("UPDATE " + nombreTabla + " SET ");
             
             String valor1, valor2, valor3;
             
@@ -140,24 +140,24 @@ public class registros {
             
             switch ((String)llave.get(0)) {
                     case ("varchar"):
-                        QueryString.append("'" + (String)llave.get(3) + "'");
+                        QueryString.append("'" + (String)llave.get(2) + "'");
                         break;
                     case ("char"):
-                        QueryString.append("'" + (String)llave.get(3) + "'");
+                        QueryString.append("'" + (String)llave.get(2) + "'");
                         break;
                     case ("int"):
-                        QueryString.append(Integer.parseInt((String)llave.get(3)));
+                        QueryString.append(Integer.parseInt((String)llave.get(2)));
                         break;
                     case ("double"):
-                        QueryString.append(Double.parseDouble((String)llave.get(3)));
+                        QueryString.append(Double.parseDouble((String)llave.get(2)));
                         break;
                     default:
-                        QueryString.append((String)llave.get(3));
+                        QueryString.append((String)llave.get(2));
                         break;
                 }
             
             System.out.println("Editar:" + QueryString.toString());
-            //query.executeUpdate(QueryString.toString());
+            query.executeUpdate(QueryString.toString());
 
             con.commit();
             con.close();

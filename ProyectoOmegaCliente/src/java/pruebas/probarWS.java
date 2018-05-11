@@ -42,7 +42,7 @@ public class probarWS {
         //Probar crear registro
         ArrayList datos = new ArrayList();
         
-         datos.add("varchar");
+        datos.add("varchar");
         datos.add("capcaz99");
         datos.add("varchar");
         datos.add("1234");
@@ -52,8 +52,21 @@ public class probarWS {
         //System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
         
         //Probar editar registro
+        ArrayList llave = new ArrayList();
+        ArrayList nuevosDatos = new ArrayList();
         
+        llave.add("int");
+        llave.add("id");
+        llave.add("2");
         
+        nuevosDatos.add("varchar");
+        nuevosDatos.add("usario");
+        nuevosDatos.add("cap");
+        nuevosDatos.add("varchar");
+        nuevosDatos.add("pass");
+        nuevosDatos.add("1324");
+        
+        System.out.println("WS editar Registro: "+editarRegistro("tablaPrueba",llave,nuevosDatos));
         
     }
 
