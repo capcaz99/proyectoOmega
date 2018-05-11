@@ -58,4 +58,25 @@ public interface Registros {
         @WebParam(name = "datosTupla", targetNamespace = "")
         List<Object> datosTupla);
 
+    /**
+     * 
+     * @param nombreTabla
+     * @param nuevosDatos
+     * @param llave
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "editarRegistro", targetNamespace = "http://webservices/", className = "webservices.EditarRegistro")
+    @ResponseWrapper(localName = "editarRegistroResponse", targetNamespace = "http://webservices/", className = "webservices.EditarRegistroResponse")
+    @Action(input = "http://webservices/registros/editarRegistroRequest", output = "http://webservices/registros/editarRegistroResponse")
+    public Integer editarRegistro(
+        @WebParam(name = "nombreTabla", targetNamespace = "")
+        String nombreTabla,
+        @WebParam(name = "llave", targetNamespace = "")
+        List<Object> llave,
+        @WebParam(name = "nuevosDatos", targetNamespace = "")
+        List<Object> nuevosDatos);
+
 }

@@ -109,9 +109,9 @@ public class registros {
             String valor1, valor2, valor3;
             
             for (int i = 0; i < nuevosDatos.size(); i += 3) {
-                valor1 = (String) nuevosDatos.get(i);
-                valor2 = (String) nuevosDatos.get(i+1);
-                valor3 = (String) nuevosDatos.get(i+2);
+                valor1 = (String) nuevosDatos.get(i); //TIPO
+                valor2 = (String) nuevosDatos.get(i+1); // NOMBRE DE COLUMNA
+                valor3 = (String) nuevosDatos.get(i+2); //VALOR DE COLUMNA
                 
                 QueryString.append(valor2+" = ");
                 switch (valor1) {
@@ -135,6 +135,26 @@ public class registros {
                 if(i+3 != nuevosDatos.size())
                     QueryString.append(", ");
             }
+            
+            QueryString.append(" WHERE "+(String)llave.get(1)+" = ");
+            
+            switch ((String)llave.get(0)) {
+                    case ("varchar"):
+                        QueryString.append("'" + (String)llave.get(3) + "'");
+                        break;
+                    case ("char"):
+                        QueryString.append("'" + (String)llave.get(3) + "'");
+                        break;
+                    case ("int"):
+                        QueryString.append(Integer.parseInt((String)llave.get(3)));
+                        break;
+                    case ("double"):
+                        QueryString.append(Double.parseDouble((String)llave.get(3)));
+                        break;
+                    default:
+                        QueryString.append((String)llave.get(3));
+                        break;
+                }
             
             System.out.println("Editar:" + QueryString.toString());
             //query.executeUpdate(QueryString.toString());

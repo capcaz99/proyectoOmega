@@ -4,6 +4,10 @@
 
 <xs:element name="crearRegistroResponse" type="tns:crearRegistroResponse"/>
 
+<xs:element name="editarRegistro" type="tns:editarRegistro"/>
+
+<xs:element name="editarRegistroResponse" type="tns:editarRegistroResponse"/>
+
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
@@ -16,6 +20,20 @@
 </xs:complexType>
 
 <xs:complexType name="crearRegistroResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editarRegistro">
+<xs:sequence>
+<xs:element name="nombreTabla" type="xs:string" minOccurs="0"/>
+<xs:element name="llave" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="nuevosDatos" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editarRegistroResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int" minOccurs="0"/>
 </xs:sequence>

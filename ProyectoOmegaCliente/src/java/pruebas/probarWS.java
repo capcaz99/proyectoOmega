@@ -21,10 +21,10 @@ public class probarWS {
     
     public static void main(String[] args){
         
+        //Probar crear tabla
         ArrayList nombre = new ArrayList();
         ArrayList tipo = new ArrayList();
         ArrayList caract = new ArrayList();
-        ArrayList datos = new ArrayList();
         
         nombre.add("tablaPrueba");
         nombre.add("usuario");
@@ -37,6 +37,11 @@ public class probarWS {
         caract.add("--n20");
         caract.add("p--");
         
+        //System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
+        
+        //Probar crear registro
+        ArrayList datos = new ArrayList();
+        
          datos.add("varchar");
         datos.add("capcaz99");
         datos.add("varchar");
@@ -44,8 +49,9 @@ public class probarWS {
         datos.add("int");
         datos.add("1");
         
-        //System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
-        System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
+        //System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
+        
+        //Probar editar registro
         
         
         
@@ -61,6 +67,12 @@ public class probarWS {
         webservices.Registros_Service service = new webservices.Registros_Service();
         webservices.Registros port = service.getRegistrosPort();
         return port.crearRegistro(nombreTabla, datosTupla);
+    }
+
+    private static Integer editarRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> llave, java.util.List<java.lang.Object> nuevosDatos) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.editarRegistro(nombreTabla, llave, nuevosDatos);
     }
     
     
