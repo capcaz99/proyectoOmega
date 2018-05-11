@@ -4,6 +4,9 @@
     <service name="crearTabla">
       <implementation-class>webservices.crearTabla</implementation-class>
     </service>
+    <service name="registros">
+      <implementation-class>webservices.registros</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

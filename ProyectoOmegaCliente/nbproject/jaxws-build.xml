@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
         <delete dir="${build.generated.dir}/jax-wsCache/crearTabla"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-crearTabla"/>
+    <target name="wsimport-client-registros" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/registros"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/registros" destdir="${build.generated.dir}/jax-wsCache/registros" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/registros/wsdl/localhost_8080/registros/registros.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/registros/registros?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/registros/wsdl/localhost_8080/registros/registros.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/registros"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/registros">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-registros" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/registros"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-crearTabla, wsimport-client-registros"/>
 </project>

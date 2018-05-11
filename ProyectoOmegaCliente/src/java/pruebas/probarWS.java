@@ -24,6 +24,7 @@ public class probarWS {
         ArrayList nombre = new ArrayList();
         ArrayList tipo = new ArrayList();
         ArrayList caract = new ArrayList();
+        ArrayList datos = new ArrayList();
         
         nombre.add("tablaPrueba");
         nombre.add("usuario");
@@ -36,7 +37,16 @@ public class probarWS {
         caract.add("--n20");
         caract.add("p--");
         
-        System.out.println(crear(nombre,tipo,caract));
+         datos.add("varchar");
+        datos.add("capcaz99");
+        datos.add("varchar");
+        datos.add("1234");
+        datos.add("int");
+        datos.add("1");
+        
+        System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
+        System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
+        
         
         
     }
@@ -46,6 +56,14 @@ public class probarWS {
         webservices.CrearTabla port = service.getCrearTablaPort();
         return port.crear(nombreColumnas, tipoColumnas, caracterColumnas);
     }
+
+    private static Integer crearRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> datosTupla) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.crearRegistro(nombreTabla, datosTupla);
+    }
+    
+    
 
    
 

@@ -6,4 +6,6 @@
     <system systemId="http://localhost:8080/ProyectoOmega/crearTabla2?xsd=1" uri="src/conf/xml-resources/web-service-references/crearTabla2/wsdl/localhost_8080/ProyectoOmega/crearTabla2.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/crearTabla/crearTabla?WSDL" uri="src/conf/xml-resources/web-service-references/crearTabla/wsdl/localhost_8080/crearTabla/crearTabla.wsdl"/>
     <system systemId="http://localhost:8080/crearTabla/crearTabla?xsd=1" uri="src/conf/xml-resources/web-service-references/crearTabla/wsdl/localhost_8080/crearTabla/crearTabla.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/registros/registros?WSDL" uri="src/conf/xml-resources/web-service-references/registros/wsdl/localhost_8080/registros/registros.wsdl"/>
+    <system systemId="http://localhost:8080/registros/registros?xsd=1" uri="src/conf/xml-resources/web-service-references/registros/wsdl/localhost_8080/registros/registros.xsd_1.xsd"/>
 </catalog>
