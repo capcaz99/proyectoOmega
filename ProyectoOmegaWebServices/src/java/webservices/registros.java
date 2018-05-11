@@ -76,7 +76,7 @@ public class registros {
             QueryString.append(")");
             
             System.out.println("Agregar:" + QueryString.toString());
-            //query.executeUpdate(QueryString.toString());
+            query.executeUpdate(QueryString.toString());
 
             con.commit();
             con.close();
@@ -91,5 +91,71 @@ public class registros {
             return 2; //Error al hacer la conexión a la base de datos o al ejecutar query
         }
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "editarRegistro")
+    public Integer editarRegistro(@WebParam(name = "nombreTabla") String nombreTabla, @WebParam(name = "llave") ArrayList llave, @WebParam(name = "nuevosDatos") ArrayList nuevosDatos) {
+        
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/DBWizard;",
+                    "root", "root");
+            Statement query = con.createStatement();
+            
+            StringBuilder QueryString = new StringBuilder("UPDATEV " + nombreTabla + "SET ");
+            
+            String valor1, valor2, valor3;
+            
+            for (int i = 0; i < nuevosDatos.size(); i += 3) {
+                valor1 = (String) nuevosDatos.get(i);
+                valor2 = (String) nuevosDatos.get(i+1);
+                valor3 = (String) nuevosDatos.get(i+2);
+                
+                QueryString.append(valor2+" = ");
+                switch (valor1) {
+                    case ("varchar"):
+                        QueryString.append("'" + valor3 + "'");
+                        break;
+                    case ("char"):
+                        QueryString.append("'" + valor3 + "'");
+                        break;
+                    case ("int"):
+                        QueryString.append(Integer.parseInt(valor3));
+                        break;
+                    case ("double"):
+                        QueryString.append(Double.parseDouble(valor3));
+                        break;
+                    default:
+                        QueryString.append(valor3);
+                        break;
+                }
+                
+                if(i+3 != nuevosDatos.size())
+                    QueryString.append(", ");
+            }
+            
+            System.out.println("Editar:" + QueryString.toString());
+            //query.executeUpdate(QueryString.toString());
+
+            con.commit();
+            con.close();
+
+            return 0; //Sin errror 
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return 2;
+        }
+            
+            
+    }
+    
+    
+    
 
 }

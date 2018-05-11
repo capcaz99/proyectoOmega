@@ -44,7 +44,7 @@ public class probarWS {
         datos.add("int");
         datos.add("1");
         
-        System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
+        //System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
         System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
         
         
@@ -62,6 +62,8 @@ public class probarWS {
         webservices.Registros port = service.getRegistrosPort();
         return port.crearRegistro(nombreTabla, datosTupla);
     }
+    
+    
     
     
 
