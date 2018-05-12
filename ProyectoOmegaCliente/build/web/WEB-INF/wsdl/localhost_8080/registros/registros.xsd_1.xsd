@@ -8,9 +8,26 @@
 
 <xs:element name="editarRegistroResponse" type="tns:editarRegistroResponse"/>
 
+<xs:element name="eliminarRegistro" type="tns:eliminarRegistro"/>
+
+<xs:element name="eliminarRegistroResponse" type="tns:eliminarRegistroResponse"/>
+
 <xs:element name="hello" type="tns:hello"/>
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:complexType name="eliminarRegistro">
+<xs:sequence>
+<xs:element name="nombreTabla" type="xs:string" minOccurs="0"/>
+<xs:element name="lave" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="eliminarRegistroResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
 
 <xs:complexType name="crearRegistro">
 <xs:sequence>

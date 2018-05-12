@@ -22,51 +22,54 @@ public class probarWS {
     public static void main(String[] args){
         
         //Probar crear tabla
-        ArrayList nombre = new ArrayList();
-        ArrayList tipo = new ArrayList();
-        ArrayList caract = new ArrayList();
-        
-        nombre.add("tablaPrueba");
-        nombre.add("usuario");
-        nombre.add("pass");
-        nombre.add("id");
-        tipo.add("varchar");
-        tipo.add("varchar");
-        tipo.add("int");
-        caract.add("-un20");
-        caract.add("--n20");
-        caract.add("p--");
+//        ArrayList nombre = new ArrayList();
+//        ArrayList tipo = new ArrayList();
+//        ArrayList caract = new ArrayList();
+//        
+//        nombre.add("tablaPrueba");
+//        nombre.add("usuario");
+//        nombre.add("pass");
+//        nombre.add("id");
+//        tipo.add("varchar");
+//        tipo.add("varchar");
+//        tipo.add("int");
+//        caract.add("-un20");
+//        caract.add("--n20");
+//        caract.add("p--");
         
         //System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
         
         //Probar crear registro
-        ArrayList datos = new ArrayList();
-        
-        datos.add("varchar");
-        datos.add("capcaz99");
-        datos.add("varchar");
-        datos.add("1234");
-        datos.add("int");
-        datos.add("1");
+//        ArrayList datos = new ArrayList();
+//        
+//        datos.add("varchar");
+//        datos.add("capcaz99");
+//        datos.add("varchar");
+//        datos.add("1234");
+//        datos.add("int");
+//        datos.add("1");
         
         //System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
         
         //Probar editar registro
         ArrayList llave = new ArrayList();
-        ArrayList nuevosDatos = new ArrayList();
-        
+//        ArrayList nuevosDatos = new ArrayList();
+//        
         llave.add("int");
         llave.add("id");
-        llave.add("2");
+        llave.add("1");
+//        
+//        nuevosDatos.add("varchar");
+//        nuevosDatos.add("usuario");
+//        nuevosDatos.add("cap");
+//        nuevosDatos.add("varchar");
+//        nuevosDatos.add("pass");
+//        nuevosDatos.add("1324");
         
-        nuevosDatos.add("varchar");
-        nuevosDatos.add("usario");
-        nuevosDatos.add("cap");
-        nuevosDatos.add("varchar");
-        nuevosDatos.add("pass");
-        nuevosDatos.add("1324");
+        //System.out.println("WS editar Registro: "+editarRegistro("tablaPrueba",llave,nuevosDatos));
         
-        System.out.println("WS editar Registro: "+editarRegistro("tablaPrueba",llave,nuevosDatos));
+        //Probar eliminar
+        System.out.println("WS eliminar registro: "+eliminarRegistro("tablaPrueba", llave));
         
     }
 
@@ -86,6 +89,12 @@ public class probarWS {
         webservices.Registros_Service service = new webservices.Registros_Service();
         webservices.Registros port = service.getRegistrosPort();
         return port.editarRegistro(nombreTabla, llave, nuevosDatos);
+    }
+
+    private static Integer eliminarRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> lave) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.eliminarRegistro(nombreTabla, lave);
     }
     
     

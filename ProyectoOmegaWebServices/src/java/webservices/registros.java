@@ -174,6 +174,60 @@ public class registros {
             
             
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "eliminarRegistro")
+    public Integer eliminarRegistro(@WebParam(name = "nombreTabla") String nombreTabla, @WebParam(name = "lave") ArrayList llave) {
+        
+        try {
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/DBWizard;",
+                    "root", "root");
+            Statement query = con.createStatement();
+            
+            StringBuilder QueryString = new StringBuilder("DELETE FROM "+nombreTabla);
+            
+            QueryString.append(" WHERE "+(String)llave.get(1)+" = ");
+            
+            switch ((String)llave.get(0)) {
+                    case ("varchar"):
+                        QueryString.append("'" + (String)llave.get(2) + "'");
+                        break;
+                    case ("char"):
+                        QueryString.append("'" + (String)llave.get(2) + "'");
+                        break;
+                    case ("int"):
+                        QueryString.append(Integer.parseInt((String)llave.get(2)));
+                        break;
+                    case ("double"):
+                        QueryString.append(Double.parseDouble((String)llave.get(2)));
+                        break;
+                    default:
+                        QueryString.append((String)llave.get(2));
+                        break;
+                }
+            
+            System.out.println("Eliminar:" + QueryString.toString());
+            query.executeUpdate(QueryString.toString());
+
+            con.commit();
+            con.close();
+
+            return 0; //Sin errror 
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return 2;
+        }
+        
+    }
+    
+    
     
     
     

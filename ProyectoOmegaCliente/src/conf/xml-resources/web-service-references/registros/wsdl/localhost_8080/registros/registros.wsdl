@@ -10,6 +10,12 @@
 <message name="helloResponse">
 <part name="parameters" element="tns:helloResponse"/>
 </message>
+<message name="eliminarRegistro">
+<part name="parameters" element="tns:eliminarRegistro"/>
+</message>
+<message name="eliminarRegistroResponse">
+<part name="parameters" element="tns:eliminarRegistroResponse"/>
+</message>
 <message name="crearRegistro">
 <part name="parameters" element="tns:crearRegistro"/>
 </message>
@@ -27,6 +33,10 @@
 <input wsam:Action="http://webservices/registros/helloRequest" message="tns:hello"/>
 <output wsam:Action="http://webservices/registros/helloResponse" message="tns:helloResponse"/>
 </operation>
+<operation name="eliminarRegistro">
+<input wsam:Action="http://webservices/registros/eliminarRegistroRequest" message="tns:eliminarRegistro"/>
+<output wsam:Action="http://webservices/registros/eliminarRegistroResponse" message="tns:eliminarRegistroResponse"/>
+</operation>
 <operation name="crearRegistro">
 <input wsam:Action="http://webservices/registros/crearRegistroRequest" message="tns:crearRegistro"/>
 <output wsam:Action="http://webservices/registros/crearRegistroResponse" message="tns:crearRegistroResponse"/>
@@ -39,6 +49,15 @@
 <binding name="registrosPortBinding" type="tns:registros">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
 <operation name="hello">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarRegistro">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

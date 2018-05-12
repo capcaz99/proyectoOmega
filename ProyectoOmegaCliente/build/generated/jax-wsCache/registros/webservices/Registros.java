@@ -43,6 +43,24 @@ public interface Registros {
     /**
      * 
      * @param nombreTabla
+     * @param lave
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "eliminarRegistro", targetNamespace = "http://webservices/", className = "webservices.EliminarRegistro")
+    @ResponseWrapper(localName = "eliminarRegistroResponse", targetNamespace = "http://webservices/", className = "webservices.EliminarRegistroResponse")
+    @Action(input = "http://webservices/registros/eliminarRegistroRequest", output = "http://webservices/registros/eliminarRegistroResponse")
+    public Integer eliminarRegistro(
+        @WebParam(name = "nombreTabla", targetNamespace = "")
+        String nombreTabla,
+        @WebParam(name = "lave", targetNamespace = "")
+        List<Object> lave);
+
+    /**
+     * 
+     * @param nombreTabla
      * @param datosTupla
      * @return
      *     returns java.lang.Integer
