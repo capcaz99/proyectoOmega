@@ -22,22 +22,23 @@ public class probarWS {
     public static void main(String[] args){
         
         //Probar crear tabla
-//        ArrayList nombre = new ArrayList();
-//        ArrayList tipo = new ArrayList();
-//        ArrayList caract = new ArrayList();
-//        
-//        nombre.add("tablaPrueba");
-//        nombre.add("usuario");
-//        nombre.add("pass");
-//        nombre.add("id");
-//        tipo.add("varchar");
-//        tipo.add("varchar");
-//        tipo.add("int");
-//        caract.add("-un20");
-//        caract.add("--n20");
-//        caract.add("p--");
+        ArrayList nombre = new ArrayList();
+        ArrayList tipo = new ArrayList();
+        ArrayList caract = new ArrayList();
         
-        //System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
+        nombre.add("tablaPrueba");
+        nombre.add("usuario");
+        nombre.add("pass");
+        nombre.add("id");
+        tipo.add("1");
+        tipo.add("varchar");
+        tipo.add("varchar");
+        tipo.add("int");
+        caract.add("-un20");
+        caract.add("--n20");
+        caract.add("p--");
+        
+        System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
         
         //Probar crear registro
 //        ArrayList datos = new ArrayList();
@@ -55,10 +56,10 @@ public class probarWS {
         ArrayList llave = new ArrayList();
 //        ArrayList nuevosDatos = new ArrayList();
 //        
-        llave.add("int");
-        llave.add("id");
-        llave.add("1");
-//        
+//        llave.add("int");
+//        llave.add("id");
+//        llave.add("1");
+////        
 //        nuevosDatos.add("varchar");
 //        nuevosDatos.add("usuario");
 //        nuevosDatos.add("cap");
@@ -69,11 +70,11 @@ public class probarWS {
         //System.out.println("WS editar Registro: "+editarRegistro("tablaPrueba",llave,nuevosDatos));
         
         //Probar eliminar
-        System.out.println("WS eliminar registro: "+eliminarRegistro("tablaPrueba", llave));
+        //System.out.println("WS eliminar registro: "+eliminarRegistro("tablaPrueba", llave));
         
     }
 
-    private static Boolean crear(java.util.List<java.lang.Object> nombreColumnas, java.util.List<java.lang.Object> tipoColumnas, java.util.List<java.lang.Object> caracterColumnas) {
+    private static Integer crear(java.util.List<java.lang.Object> nombreColumnas, java.util.List<java.lang.Object> tipoColumnas, java.util.List<java.lang.Object> caracterColumnas) {
         webservices.CrearTabla_Service service = new webservices.CrearTabla_Service();
         webservices.CrearTabla port = service.getCrearTablaPort();
         return port.crear(nombreColumnas, tipoColumnas, caracterColumnas);
