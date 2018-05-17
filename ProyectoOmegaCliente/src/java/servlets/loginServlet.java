@@ -54,23 +54,30 @@ public class loginServlet extends HttpServlet {
                                     "root");
                    Statement query = con.createStatement();
                    ResultSet rs = query.executeQuery("SELECT * FROM USERS WHERE USERNAME ="+"'"+username+"'");
+                   String userid = "";
                    
-                   while(rs.next())
+                   while(rs.next()){
                     passwordDB = rs.getString("PASSWORD");
+                    userid = rs.getString("USERID");
+                   }
                    
                    if(password.equals(passwordDB)){
                        
                     System.out.println("Login exitoso!");
                     
+                    
+                    
                     HttpSession mySession = request.getSession();
                     mySession.setAttribute("username", username);
-                    mySession.setAttribute("userid", rs.getString("USERID"));
+                    mySession.setAttribute("userid", userid);
                     mySession.setMaxInactiveInterval(50);
-                    response.sendRedirect("home.jsp");
+                    
+                    
                     
                    con.commit();
                    con.close();
                    
+                   response.sendRedirect("home.jsp");
                    }else{
                        System.out.println("Contraseña - usuario incorrecto");
                        response.sendRedirect("index.html");
