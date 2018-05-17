@@ -25,26 +25,25 @@ import javax.ejb.Stateless;
 @Stateless()
 public class crearTabla {
 
-
     /**
      * Web service operation
      */
     @WebMethod(operationName = "crear")
-    public Boolean crear(@WebParam(name = "nombreColumnas") ArrayList nombreColumnas, @WebParam(name = "tipoColumnas") ArrayList tipoColumnas, @WebParam(name = "caracterColumnas") ArrayList caracterColumnas) {
-        
-         try {
+    public Integer crear(@WebParam(name = "nombreColumnas") ArrayList nombreColumnas, @WebParam(name = "tipoColumnas") ArrayList tipoColumnas, @WebParam(name = "caracterColumnas") ArrayList caracterColumnas) {
+        try {
             
-            String nombre, tipo, nombreTabla, caract, tam, end = "";
+            String nombre, tipo, nombreTabla, caract, tam, end = "", IdUsuario;
             char[] caracteristicas;
              
-            nombreTabla = (String)nombreColumnas.get(0);
+            nombreTabla   = (String)nombreColumnas.get(0);
+            IdUsuario     = (String)tipoColumnas.get(0);
             
             StringBuilder QueryString = new StringBuilder("create table "+nombreTabla+" ( ");
             
             for (int j = 0; j < nombreColumnas.size()-1; j++) {
                 
                 nombre = (String)nombreColumnas.get(j+1);
-                tipo   = (String)tipoColumnas.get(j);
+                tipo   = (String)tipoColumnas.get(j+1);
                 caract = (String)caracterColumnas.get(j);
                 caracteristicas = caract.substring(0, 3).toCharArray();
                 
@@ -76,21 +75,23 @@ public class crearTabla {
             Statement query = con.createStatement();
             query.executeUpdate(QueryString.toString());
             
-             System.out.println("Query ejecutada");
+            System.out.println("Query creacion tabla ejecutada");
              
+            String query2 = "INSERT INTO RELACION VALUES("+Integer.parseInt(IdUsuario)+",'"+nombreTabla+"')";
+            query.executeUpdate(query2);
+            
+             System.out.println("Query relacion ejecutada.");
             con.commit();
             con.close();
             
+            return 1;
             
         } catch (SQLException ex) {
             Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
+            return 1;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
+            return 2;
         }
-         return true;
-        
-        
     }
-    
-    
 }

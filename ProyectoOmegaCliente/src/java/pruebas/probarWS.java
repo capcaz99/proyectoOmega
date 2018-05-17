@@ -6,8 +6,12 @@
 
 package pruebas;
 
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import net.java.dev.jaxb.array.AnyTypeArray;
 
 /**
  *
@@ -19,58 +23,77 @@ public class probarWS {
     
     
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException{
         
         //Probar crear tabla
-        ArrayList nombre = new ArrayList();
-        ArrayList tipo = new ArrayList();
-        ArrayList caract = new ArrayList();
-        
-        nombre.add("tablaPrueba");
-        nombre.add("usuario");
-        nombre.add("pass");
-        nombre.add("id");
-        tipo.add("varchar");
-        tipo.add("varchar");
-        tipo.add("int");
-        caract.add("-un20");
-        caract.add("--n20");
-        caract.add("p--");
-        
-        //System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
+//        ArrayList nombre = new ArrayList();
+//        ArrayList tipo = new ArrayList();
+//        ArrayList caract = new ArrayList();
+//        
+//        nombre.add("tablaPrueba");
+//        nombre.add("usuario");
+//        nombre.add("pass");
+//        nombre.add("id");
+//        tipo.add("1");
+//        tipo.add("varchar");
+//        tipo.add("varchar");
+//        tipo.add("int");
+//        caract.add("-un20");
+//        caract.add("--n20");
+//        caract.add("p--");
+//        
+//        System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
         
         //Probar crear registro
-        ArrayList datos = new ArrayList();
-        
-        datos.add("varchar");
-        datos.add("capcaz99");
-        datos.add("varchar");
-        datos.add("1234");
-        datos.add("int");
-        datos.add("1");
+//        ArrayList datos = new ArrayList();
+//        
+//        datos.add("varchar");
+//        datos.add("capcaz99");
+//        datos.add("varchar");
+//        datos.add("1234");
+//        datos.add("int");
+//        datos.add("1");
         
         //System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
         
         //Probar editar registro
-        ArrayList llave = new ArrayList();
-        ArrayList nuevosDatos = new ArrayList();
+        //ArrayList llave = new ArrayList();
+//        ArrayList nuevosDatos = new ArrayList();
+//        
+//        llave.add("int");
+//        llave.add("id");
+//        llave.add("1");
+////        
+//        nuevosDatos.add("varchar");
+//        nuevosDatos.add("usuario");
+//        nuevosDatos.add("cap");
+//        nuevosDatos.add("varchar");
+//        nuevosDatos.add("pass");
+//        nuevosDatos.add("1324");
         
-        llave.add("int");
-        llave.add("id");
-        llave.add("2");
+        //System.out.println("WS editar Registro: "+editarRegistro("tablaPrueba",llave,nuevosDatos));
         
-        nuevosDatos.add("varchar");
-        nuevosDatos.add("usario");
-        nuevosDatos.add("cap");
-        nuevosDatos.add("varchar");
-        nuevosDatos.add("pass");
-        nuevosDatos.add("1324");
+        //Probar eliminar
+        //System.out.println("WS eliminar registro: "+eliminarRegistro("tablaPrueba", llave));
         
-        System.out.println("WS editar Registro: "+editarRegistro("tablaPrueba",llave,nuevosDatos));
+        
+        //Probar obtener registros
+       
+         System.out.println(obtenerRegistros("TABLAPRUEBA"));   
+        
+        //System.out.println(rs.getString("USUARIO"));
+        
+        
+        //Probar obtener tablas
+//        ArrayList resultado = (ArrayList)obtenerTablasUsuario("1");
+//        System.out.println("YA");
+//        for (int i = 0; i < resultado.size(); i++) {
+//            System.out.println(resultado.get(i));
+//        }
         
     }
 
-    private static Boolean crear(java.util.List<java.lang.Object> nombreColumnas, java.util.List<java.lang.Object> tipoColumnas, java.util.List<java.lang.Object> caracterColumnas) {
+    private static Integer crear(java.util.List<java.lang.Object> nombreColumnas, java.util.List<java.lang.Object> tipoColumnas, java.util.List<java.lang.Object> caracterColumnas) {
         webservices.CrearTabla_Service service = new webservices.CrearTabla_Service();
         webservices.CrearTabla port = service.getCrearTablaPort();
         return port.crear(nombreColumnas, tipoColumnas, caracterColumnas);
@@ -87,6 +110,32 @@ public class probarWS {
         webservices.Registros port = service.getRegistrosPort();
         return port.editarRegistro(nombreTabla, llave, nuevosDatos);
     }
+
+    private static Integer eliminarRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> lave) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.eliminarRegistro(nombreTabla, lave);
+    }
+    
+    private static java.util.List<java.lang.Object> obtenerTablasUsuario(java.lang.String idUsuario) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.obtenerTablasUsuario(idUsuario);
+    }
+
+    private static String obtenerRegistros(java.lang.String nombreTabla) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.obtenerRegistros(nombreTabla);
+    }
+
+   
+    
+    
+    
+    
+    
+    
     
     
     
