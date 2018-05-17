@@ -22,6 +22,24 @@
 <message name="editarRegistroResponse">
 <part name="parameters" element="tns:editarRegistroResponse"/>
 </message>
+<message name="eliminarRegistro">
+<part name="parameters" element="tns:eliminarRegistro"/>
+</message>
+<message name="eliminarRegistroResponse">
+<part name="parameters" element="tns:eliminarRegistroResponse"/>
+</message>
+<message name="obtenerRegistros">
+<part name="parameters" element="tns:obtenerRegistros"/>
+</message>
+<message name="obtenerRegistrosResponse">
+<part name="parameters" element="tns:obtenerRegistrosResponse"/>
+</message>
+<message name="obtenerTablasUsuario">
+<part name="parameters" element="tns:obtenerTablasUsuario"/>
+</message>
+<message name="obtenerTablasUsuarioResponse">
+<part name="parameters" element="tns:obtenerTablasUsuarioResponse"/>
+</message>
 <portType name="registros">
 <operation name="hello">
 <input wsam:Action="http://webservices/registros/helloRequest" message="tns:hello"/>
@@ -34,6 +52,18 @@
 <operation name="editarRegistro">
 <input wsam:Action="http://webservices/registros/editarRegistroRequest" message="tns:editarRegistro"/>
 <output wsam:Action="http://webservices/registros/editarRegistroResponse" message="tns:editarRegistroResponse"/>
+</operation>
+<operation name="eliminarRegistro">
+<input wsam:Action="http://webservices/registros/eliminarRegistroRequest" message="tns:eliminarRegistro"/>
+<output wsam:Action="http://webservices/registros/eliminarRegistroResponse" message="tns:eliminarRegistroResponse"/>
+</operation>
+<operation name="obtenerRegistros">
+<input wsam:Action="http://webservices/registros/obtenerRegistrosRequest" message="tns:obtenerRegistros"/>
+<output wsam:Action="http://webservices/registros/obtenerRegistrosResponse" message="tns:obtenerRegistrosResponse"/>
+</operation>
+<operation name="obtenerTablasUsuario">
+<input wsam:Action="http://webservices/registros/obtenerTablasUsuarioRequest" message="tns:obtenerTablasUsuario"/>
+<output wsam:Action="http://webservices/registros/obtenerTablasUsuarioResponse" message="tns:obtenerTablasUsuarioResponse"/>
 </operation>
 </portType>
 <binding name="registrosPortBinding" type="tns:registros">
@@ -57,6 +87,33 @@
 </output>
 </operation>
 <operation name="editarRegistro">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="eliminarRegistro">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="obtenerRegistros">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="obtenerTablasUsuario">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

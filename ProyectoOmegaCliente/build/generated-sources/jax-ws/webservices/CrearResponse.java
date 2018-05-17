@@ -13,15 +13,15 @@ import javax.xml.bind.annotation.XmlType;
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="crearResponse"&gt;
- *   &lt;complexContent&gt;
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
- *       &lt;sequence&gt;
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/&gt;
- *       &lt;/sequence&gt;
- *     &lt;/restriction&gt;
- *   &lt;/complexContent&gt;
- * &lt;/complexType&gt;
+ * &lt;complexType name="crearResponse">
+ *   &lt;complexContent>
+ *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *       &lt;sequence>
+ *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
+ *       &lt;/sequence>
+ *     &lt;/restriction>
+ *   &lt;/complexContent>
+ * &lt;/complexType>
  * </pre>
  * 
  * 
@@ -33,17 +33,17 @@ import javax.xml.bind.annotation.XmlType;
 public class CrearResponse {
 
     @XmlElement(name = "return")
-    protected Boolean _return;
+    protected Integer _return;
 
     /**
      * Obtiene el valor de la propiedad return.
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link Integer }
      *     
      */
-    public Boolean isReturn() {
+    public Integer getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class CrearResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Boolean }
+     *     {@link Integer }
      *     
      */
-    public void setReturn(Boolean value) {
+    public void setReturn(Integer value) {
         this._return = value;
     }
 

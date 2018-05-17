@@ -31,14 +31,14 @@ public interface CrearTabla {
      * @param tipoColumnas
      * @param caracterColumnas
      * @return
-     *     returns java.lang.Boolean
+     *     returns java.lang.Integer
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "crear", targetNamespace = "http://webservices/", className = "webservices.Crear")
     @ResponseWrapper(localName = "crearResponse", targetNamespace = "http://webservices/", className = "webservices.CrearResponse")
     @Action(input = "http://webservices/crearTabla/crearRequest", output = "http://webservices/crearTabla/crearResponse")
-    public Boolean crear(
+    public Integer crear(
         @WebParam(name = "nombreColumnas", targetNamespace = "")
         List<Object> nombreColumnas,
         @WebParam(name = "tipoColumnas", targetNamespace = "")
