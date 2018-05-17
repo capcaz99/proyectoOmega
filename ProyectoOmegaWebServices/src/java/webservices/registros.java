@@ -7,6 +7,7 @@ package webservices;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -226,6 +227,66 @@ public class registros {
         }
         
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "obtenerRegistros")
+    public ResultSet obtenerRegistros(@WebParam(name = "nombreTabla") String nombreTabla) {
+        
+        try {
+            
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/DBWizard;",
+                    "root", "root");
+            Statement query = con.createStatement();
+            String QueryString = "SELECT * FROM "+nombreTabla;
+            
+            ResultSet rs = query.executeQuery(QueryString);
+            
+            con.close();
+            
+            return rs;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "obtenerTablasUsuario")
+    public ArrayList obtenerTablasUsuario(@WebParam(name = "idUsuario") String idUsuario) {
+        
+        try {
+            
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
+            Connection con = DriverManager.getConnection("jdbc:derby://localhost:1527/DBWizard;",
+                    "root", "root");
+            Statement query = con.createStatement();
+            String QueryString = "SELECT * FROM RELACION WHERE IDUSUARIO ="+idUsuario;
+            
+            ResultSet rs = query.executeQuery(QueryString);
+            
+            con.close();
+            
+            ArrayList nombres = (ArrayList)rs.getArray("NOMBRETABLA");
+            
+            return nombres;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        } catch (SQLException ex) {
+            Logger.getLogger(registros.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
+    
     
     
     

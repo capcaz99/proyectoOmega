@@ -53,7 +53,7 @@ public class probarWS {
         //System.out.println("WS Crear Registro: "+crearRegistro("tablaPrueba",datos));
         
         //Probar editar registro
-        ArrayList llave = new ArrayList();
+        //ArrayList llave = new ArrayList();
 //        ArrayList nuevosDatos = new ArrayList();
 //        
 //        llave.add("int");
@@ -71,6 +71,10 @@ public class probarWS {
         
         //Probar eliminar
         //System.out.println("WS eliminar registro: "+eliminarRegistro("tablaPrueba", llave));
+        
+        
+        //Probar obtener tablas
+        
         
     }
 
@@ -97,6 +101,8 @@ public class probarWS {
         webservices.Registros port = service.getRegistrosPort();
         return port.eliminarRegistro(nombreTabla, lave);
     }
+    
+    
     
     
     
