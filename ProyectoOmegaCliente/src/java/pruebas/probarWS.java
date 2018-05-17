@@ -6,6 +6,9 @@
 
 package pruebas;
 
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,26 +22,26 @@ public class probarWS {
     
     
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException{
         
         //Probar crear tabla
-        ArrayList nombre = new ArrayList();
-        ArrayList tipo = new ArrayList();
-        ArrayList caract = new ArrayList();
-        
-        nombre.add("tablaPrueba");
-        nombre.add("usuario");
-        nombre.add("pass");
-        nombre.add("id");
-        tipo.add("1");
-        tipo.add("varchar");
-        tipo.add("varchar");
-        tipo.add("int");
-        caract.add("-un20");
-        caract.add("--n20");
-        caract.add("p--");
-        
-        System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
+//        ArrayList nombre = new ArrayList();
+//        ArrayList tipo = new ArrayList();
+//        ArrayList caract = new ArrayList();
+//        
+//        nombre.add("tablaPrueba");
+//        nombre.add("usuario");
+//        nombre.add("pass");
+//        nombre.add("id");
+//        tipo.add("1");
+//        tipo.add("varchar");
+//        tipo.add("varchar");
+//        tipo.add("int");
+//        caract.add("-un20");
+//        caract.add("--n20");
+//        caract.add("p--");
+//        
+//        System.out.println("WS CREAR TABLA: "+crear(nombre,tipo,caract));
         
         //Probar crear registro
 //        ArrayList datos = new ArrayList();
@@ -73,8 +76,18 @@ public class probarWS {
         //System.out.println("WS eliminar registro: "+eliminarRegistro("tablaPrueba", llave));
         
         
-        //Probar obtener tablas
+        //Probar obtener registros
+//        ResultSet rs = (ResultSet) obtenerRegistros("tablaprueba");
         
+  //      System.out.println(rs.getString("USUARIO"));
+        
+        
+        //Probar obtener tablas
+        ArrayList resultado = (ArrayList)obtenerTablasUsuario("1");
+        System.out.println("YA");
+        for (int i = 0; i < resultado.size(); i++) {
+            System.out.println(resultado.get(i));
+        }
         
     }
 
@@ -101,6 +114,22 @@ public class probarWS {
         webservices.Registros port = service.getRegistrosPort();
         return port.eliminarRegistro(nombreTabla, lave);
     }
+
+    private static Object obtenerRegistros(java.lang.String nombreTabla) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.obtenerRegistros(nombreTabla);
+    }
+
+    private static java.util.List<java.lang.Object> obtenerTablasUsuario(java.lang.String idUsuario) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.obtenerTablasUsuario(idUsuario);
+    }
+    
+    
+    
+    
     
     
     

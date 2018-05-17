@@ -29,8 +29,12 @@ public class ObjectFactory {
     private final static QName _EditarRegistro_QNAME = new QName("http://webservices/", "editarRegistro");
     private final static QName _CrearRegistroResponse_QNAME = new QName("http://webservices/", "crearRegistroResponse");
     private final static QName _Hello_QNAME = new QName("http://webservices/", "hello");
+    private final static QName _ObtenerRegistrosResponse_QNAME = new QName("http://webservices/", "obtenerRegistrosResponse");
     private final static QName _EditarRegistroResponse_QNAME = new QName("http://webservices/", "editarRegistroResponse");
+    private final static QName _ObtenerRegistros_QNAME = new QName("http://webservices/", "obtenerRegistros");
     private final static QName _HelloResponse_QNAME = new QName("http://webservices/", "helloResponse");
+    private final static QName _ObtenerTablasUsuarioResponse_QNAME = new QName("http://webservices/", "obtenerTablasUsuarioResponse");
+    private final static QName _ObtenerTablasUsuario_QNAME = new QName("http://webservices/", "obtenerTablasUsuario");
     private final static QName _EliminarRegistro_QNAME = new QName("http://webservices/", "eliminarRegistro");
 
     /**
@@ -49,6 +53,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ObtenerTablasUsuario }
+     * 
+     */
+    public ObtenerTablasUsuario createObtenerTablasUsuario() {
+        return new ObtenerTablasUsuario();
+    }
+
+    /**
+     * Create an instance of {@link ObtenerTablasUsuarioResponse }
+     * 
+     */
+    public ObtenerTablasUsuarioResponse createObtenerTablasUsuarioResponse() {
+        return new ObtenerTablasUsuarioResponse();
+    }
+
+    /**
      * Create an instance of {@link HelloResponse }
      * 
      */
@@ -57,11 +77,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ObtenerRegistros }
+     * 
+     */
+    public ObtenerRegistros createObtenerRegistros() {
+        return new ObtenerRegistros();
+    }
+
+    /**
      * Create an instance of {@link EditarRegistroResponse }
      * 
      */
     public EditarRegistroResponse createEditarRegistroResponse() {
         return new EditarRegistroResponse();
+    }
+
+    /**
+     * Create an instance of {@link ObtenerRegistrosResponse }
+     * 
+     */
+    public ObtenerRegistrosResponse createObtenerRegistrosResponse() {
+        return new ObtenerRegistrosResponse();
     }
 
     /**
@@ -150,6 +186,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerRegistrosResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "obtenerRegistrosResponse")
+    public JAXBElement<ObtenerRegistrosResponse> createObtenerRegistrosResponse(ObtenerRegistrosResponse value) {
+        return new JAXBElement<ObtenerRegistrosResponse>(_ObtenerRegistrosResponse_QNAME, ObtenerRegistrosResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link EditarRegistroResponse }{@code >}}
      * 
      */
@@ -159,12 +204,39 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerRegistros }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "obtenerRegistros")
+    public JAXBElement<ObtenerRegistros> createObtenerRegistros(ObtenerRegistros value) {
+        return new JAXBElement<ObtenerRegistros>(_ObtenerRegistros_QNAME, ObtenerRegistros.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link HelloResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://webservices/", name = "helloResponse")
     public JAXBElement<HelloResponse> createHelloResponse(HelloResponse value) {
         return new JAXBElement<HelloResponse>(_HelloResponse_QNAME, HelloResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerTablasUsuarioResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "obtenerTablasUsuarioResponse")
+    public JAXBElement<ObtenerTablasUsuarioResponse> createObtenerTablasUsuarioResponse(ObtenerTablasUsuarioResponse value) {
+        return new JAXBElement<ObtenerTablasUsuarioResponse>(_ObtenerTablasUsuarioResponse_QNAME, ObtenerTablasUsuarioResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ObtenerTablasUsuario }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://webservices/", name = "obtenerTablasUsuario")
+    public JAXBElement<ObtenerTablasUsuario> createObtenerTablasUsuario(ObtenerTablasUsuario value) {
+        return new JAXBElement<ObtenerTablasUsuario>(_ObtenerTablasUsuario_QNAME, ObtenerTablasUsuario.class, null, value);
     }
 
     /**

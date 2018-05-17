@@ -16,6 +16,38 @@
 
 <xs:element name="helloResponse" type="tns:helloResponse"/>
 
+<xs:element name="obtenerRegistros" type="tns:obtenerRegistros"/>
+
+<xs:element name="obtenerRegistrosResponse" type="tns:obtenerRegistrosResponse"/>
+
+<xs:element name="obtenerTablasUsuario" type="tns:obtenerTablasUsuario"/>
+
+<xs:element name="obtenerTablasUsuarioResponse" type="tns:obtenerTablasUsuarioResponse"/>
+
+<xs:complexType name="obtenerRegistros">
+<xs:sequence>
+<xs:element name="nombreTabla" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerRegistrosResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerTablasUsuario">
+<xs:sequence>
+<xs:element name="idUsuario" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="obtenerTablasUsuarioResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="eliminarRegistro">
 <xs:sequence>
 <xs:element name="nombreTabla" type="xs:string" minOccurs="0"/>

@@ -43,24 +43,6 @@ public interface Registros {
     /**
      * 
      * @param nombreTabla
-     * @param lave
-     * @return
-     *     returns java.lang.Integer
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "eliminarRegistro", targetNamespace = "http://webservices/", className = "webservices.EliminarRegistro")
-    @ResponseWrapper(localName = "eliminarRegistroResponse", targetNamespace = "http://webservices/", className = "webservices.EliminarRegistroResponse")
-    @Action(input = "http://webservices/registros/eliminarRegistroRequest", output = "http://webservices/registros/eliminarRegistroResponse")
-    public Integer eliminarRegistro(
-        @WebParam(name = "nombreTabla", targetNamespace = "")
-        String nombreTabla,
-        @WebParam(name = "lave", targetNamespace = "")
-        List<Object> lave);
-
-    /**
-     * 
-     * @param nombreTabla
      * @param datosTupla
      * @return
      *     returns java.lang.Integer
@@ -96,5 +78,53 @@ public interface Registros {
         List<Object> llave,
         @WebParam(name = "nuevosDatos", targetNamespace = "")
         List<Object> nuevosDatos);
+
+    /**
+     * 
+     * @param nombreTabla
+     * @param lave
+     * @return
+     *     returns java.lang.Integer
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "eliminarRegistro", targetNamespace = "http://webservices/", className = "webservices.EliminarRegistro")
+    @ResponseWrapper(localName = "eliminarRegistroResponse", targetNamespace = "http://webservices/", className = "webservices.EliminarRegistroResponse")
+    @Action(input = "http://webservices/registros/eliminarRegistroRequest", output = "http://webservices/registros/eliminarRegistroResponse")
+    public Integer eliminarRegistro(
+        @WebParam(name = "nombreTabla", targetNamespace = "")
+        String nombreTabla,
+        @WebParam(name = "lave", targetNamespace = "")
+        List<Object> lave);
+
+    /**
+     * 
+     * @param nombreTabla
+     * @return
+     *     returns java.lang.Object
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "obtenerRegistros", targetNamespace = "http://webservices/", className = "webservices.ObtenerRegistros")
+    @ResponseWrapper(localName = "obtenerRegistrosResponse", targetNamespace = "http://webservices/", className = "webservices.ObtenerRegistrosResponse")
+    @Action(input = "http://webservices/registros/obtenerRegistrosRequest", output = "http://webservices/registros/obtenerRegistrosResponse")
+    public Object obtenerRegistros(
+        @WebParam(name = "nombreTabla", targetNamespace = "")
+        String nombreTabla);
+
+    /**
+     * 
+     * @param idUsuario
+     * @return
+     *     returns java.util.List<java.lang.Object>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "obtenerTablasUsuario", targetNamespace = "http://webservices/", className = "webservices.ObtenerTablasUsuario")
+    @ResponseWrapper(localName = "obtenerTablasUsuarioResponse", targetNamespace = "http://webservices/", className = "webservices.ObtenerTablasUsuarioResponse")
+    @Action(input = "http://webservices/registros/obtenerTablasUsuarioRequest", output = "http://webservices/registros/obtenerTablasUsuarioResponse")
+    public List<Object> obtenerTablasUsuario(
+        @WebParam(name = "idUsuario", targetNamespace = "")
+        String idUsuario);
 
 }
