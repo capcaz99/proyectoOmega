@@ -64,7 +64,8 @@ public class loginServlet extends HttpServlet {
                     
                     HttpSession mySession = request.getSession();
                     mySession.setAttribute("username", username);
-                    mySession.setMaxInactiveInterval(20);
+                    mySession.setAttribute("userid", rs.getString("USERID"));
+                    mySession.setMaxInactiveInterval(50);
                     response.sendRedirect("home.jsp");
                     
                    con.commit();

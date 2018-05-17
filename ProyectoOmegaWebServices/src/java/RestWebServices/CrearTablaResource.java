@@ -36,8 +36,8 @@ public class CrearTablaResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces("application/json")
-    public String getJson() {
+    @Produces("text/html")
+    public String getHtml() {
         //TODO return proper representation object
         throw new UnsupportedOperationException();
     }
@@ -48,7 +48,7 @@ public class CrearTablaResource {
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
-    @Consumes("application/json")
-    public void putJson(String content) {
+    @Consumes("text/html")
+    public void putHtml(String content) {
     }
 }
