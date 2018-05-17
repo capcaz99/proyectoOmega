@@ -18,12 +18,14 @@
         <br>
         <input type="text" name="table_name" value="" id="table_name"/>
         <br>
-        <label> How many fields </label>
+        <label id="hello"> How many fields </label>
         <br>
         <input type="text" name="number_fields" value="" id="number_fields"/>
+        <br>
         <label> Field name </label>
         <br>
         <input type="text" name="field_name" value="" id="field_name"/>
+        <br>
         <label> type </label>
         <select name="type" id = "type">
             <option>boolean</option>
@@ -38,25 +40,42 @@
         <input type="checkbox" name="Unique" value="" id ="unique"/>
         <input type="checkbox" name="Not null" value="" id ="not_null"/>
         <br>
-        <input type="submit" value="add file" id="field_name" />
         <input type="submit" value="remove  field" id="remove_value" />
         
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Field_Name</th>
+                    <th>Type</th>
+                    <th>Primary_Key</th>
+                    <th>Unique</th>
+                    <th>Not_Null</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+
+        
         <script>
-            var tablaElementos = document.getElementById('table');
-            var txtField_name = document.getElementById('field_name');
-            var number_fields = document.getElementById('number_fields');
-            var ddlType = document.getElementById('type');
-            var btnAdd = document.getElementById('add_value');
-            var btnRm = document.getElementById('remove_value');
-            var primary_key = document.getElementById('primary_key');
-            var unique = document.getElementById('unique');
-            var not_null = document.getElementById('not_null');
+            var tabla = document.getElementById('table_data');
+          //  document.getElementById('field_name').innerHTML = "alo";
+            //var txtField_name = document.getElementById('field_name').innerHTML;
+            var number_fields = document.getElementById('number_fields').innerHTML;
+            var ddlType = document.getElementById('type').innerHTML;
+            var btnAdd = document.getElementById('add_value').innerHTML;
+            var btnRm = document.getElementById('remove_value').innerHTML;
+            var primary_key = document.getElementById('primary_key').innerHTML;
+            var unique = document.getElementById('unique').innerHTML;
+            var not_null = document.getElementById('not_null').innerHTML;
             var datos = [];
           
     
-             function btnAdd_Click(event) {
+           function btnAdd_Click(id) {
+               document.getElementById(id).setText("alo");}
                  
- /*               var field_name= txtField_name.value || '';
+              /*  var field_name= txtField_name.value || '';
                 var type = ddlType.value || '';
                  
                  if (!field_name || !field_name.trim().length) {
@@ -69,18 +88,20 @@
                 var item = {
                 field_name: field_name.trim(),
                 type: type,
-                primary_key: primary_key.
+                primary_key: primary_key,
+                unique: unique,
+                not_null: not_null
                  };
 
-            datos.push(item);*/
+            datos.push(item);
                 
     }
 
-}  
+}  */
             
             
         </script>
-        
+       <input type="submit" value="add file" id="field_name_btn" onclick ="btnAdd_Click('field_name')" />
         
         
         
