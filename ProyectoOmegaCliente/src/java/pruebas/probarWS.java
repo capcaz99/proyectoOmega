@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import net.java.dev.jaxb.array.AnyTypeArray;
 
 /**
  *
@@ -77,17 +78,18 @@ public class probarWS {
         
         
         //Probar obtener registros
-//        ResultSet rs = (ResultSet) obtenerRegistros("tablaprueba");
+       
+         System.out.println(obtenerRegistros("TABLAPRUEBA"));   
         
-  //      System.out.println(rs.getString("USUARIO"));
+        //System.out.println(rs.getString("USUARIO"));
         
         
         //Probar obtener tablas
-        ArrayList resultado = (ArrayList)obtenerTablasUsuario("1");
-        System.out.println("YA");
-        for (int i = 0; i < resultado.size(); i++) {
-            System.out.println(resultado.get(i));
-        }
+//        ArrayList resultado = (ArrayList)obtenerTablasUsuario("1");
+//        System.out.println("YA");
+//        for (int i = 0; i < resultado.size(); i++) {
+//            System.out.println(resultado.get(i));
+//        }
         
     }
 
@@ -114,18 +116,20 @@ public class probarWS {
         webservices.Registros port = service.getRegistrosPort();
         return port.eliminarRegistro(nombreTabla, lave);
     }
-
-    private static Object obtenerRegistros(java.lang.String nombreTabla) {
-        webservices.Registros_Service service = new webservices.Registros_Service();
-        webservices.Registros port = service.getRegistrosPort();
-        return port.obtenerRegistros(nombreTabla);
-    }
-
+    
     private static java.util.List<java.lang.Object> obtenerTablasUsuario(java.lang.String idUsuario) {
         webservices.Registros_Service service = new webservices.Registros_Service();
         webservices.Registros port = service.getRegistrosPort();
         return port.obtenerTablasUsuario(idUsuario);
     }
+
+    private static String obtenerRegistros(java.lang.String nombreTabla) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.obtenerRegistros(nombreTabla);
+    }
+
+   
     
     
     

@@ -101,14 +101,14 @@ public interface Registros {
      * 
      * @param nombreTabla
      * @return
-     *     returns java.lang.Object
+     *     returns java.lang.String
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "obtenerRegistros", targetNamespace = "http://webservices/", className = "webservices.ObtenerRegistros")
     @ResponseWrapper(localName = "obtenerRegistrosResponse", targetNamespace = "http://webservices/", className = "webservices.ObtenerRegistrosResponse")
     @Action(input = "http://webservices/registros/obtenerRegistrosRequest", output = "http://webservices/registros/obtenerRegistrosResponse")
-    public Object obtenerRegistros(
+    public String obtenerRegistros(
         @WebParam(name = "nombreTabla", targetNamespace = "")
         String nombreTabla);
 
