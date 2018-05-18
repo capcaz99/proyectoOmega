@@ -300,9 +300,12 @@ public class registros {
             String nombre; 
             ArrayList data = new ArrayList();
             ArrayList nombres = new ArrayList();
+            ArrayList tipos = new ArrayList();
             for (int i = 0; i < numCols; i++) {
                 rs.beforeFirst();
                 nombre = rsmd.getColumnName(i+1);
+                tipos.add(rsmd.getColumnTypeName(i+1));
+                
                 nombres.add(nombre);
                 while (rs.next()) {
                     data.add(rs.getString(nombre));
@@ -310,6 +313,7 @@ public class registros {
                 }
             }
                json.put("nombres", nombres);
+               json.put("tipos", tipos);
                json.put("datos", data);
 
             con.close();

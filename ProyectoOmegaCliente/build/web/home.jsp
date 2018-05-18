@@ -28,7 +28,7 @@
                         var final = "";
                         var str = "";
                         for (var i = 0; i < result.length; i++) {
-                            str1 = "callObtener('registros','GET','http://localhost:8080/ProyectoOmegaRest/webresources/registros/" + result[i] + "')";
+                            str1 = "callObtener('registros','GET','http://localhost:8080/ProyectoOmegaRest/webresources/registros/" + result[i] + "/1/1')";
                             final = final + result[i] + "<button onclick=" + str1 + ">Ver registros</button><br>";
                         }
                         alert(final);
@@ -53,15 +53,19 @@
                         var JSONObject = JSON.parse(ajaxRequest.responseText);
                         var nombres = JSONObject.nombres;
                         var datos = JSONObject.datos;
+                        var tipos = JSONObject.tipos;
                         var txt = "<table>";
                         var cantidad = datos.length;
                         var medida = cantidad / nombres.length;
+                        var drop = "<select>";
 
-
-                        txt = txt + "<tr>"
-                        for (var j = 0; j < nombres.length; j++) 
+                        txt = txt + "<tr>";
+                        for (var j = 0; j < nombres.length; j++) {
                             txt = txt + "<th>" + nombres[j] + "</th>";
-                        txt = txt + "</tr>"
+                            drop = drop + "<option value='"+nombres[j]+"_"+tipos[j]+"'>"+nombres[j]+"</option>";
+                        }
+                        txt = txt + "</tr>";
+                        drop = drop+"</select>";
                         
                         for (var k = 0; k < medida; k++) {
                             txt = txt + "<tr>";
@@ -71,10 +75,11 @@
                         }
                         
                         txt = txt+"</table>";
-
-
-
-
+                        
+                        txt = txt+"<br> Para editar introduce el id y selecciona el campo que quieres cambiar y su nuevo valor<br>"
+                        txt = txt + "ID: <input type='text' id='idCambio'><br>";
+                        txt = txt + "Campo:"+drop+"<br>";
+                        txt = txt + "Nuevo valor: <input type='text' id='nuevoValor'><br>"
                         document.getElementById(id).innerHTML = txt;
                     }
                 }
@@ -82,6 +87,9 @@
                 ajaxRequest.setRequestHeader("Content-Type", "text/html");
                 ajaxRequest.send();
             }
+            
+            
+            
 
         </script>
 

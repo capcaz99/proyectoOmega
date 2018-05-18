@@ -5,6 +5,7 @@
  */
 package webservices;
 
+import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -19,7 +20,7 @@ import javax.ws.rs.PUT;
  *
  * @author carlosaburto
  */
-@Path("registros/{nombreTabla}")
+@Path("registros/{nombreTabla}/{llave}/{datos}")
 public class RegistrosResource {
 
     @Context
@@ -48,7 +49,20 @@ public class RegistrosResource {
      */
     @PUT
     @Consumes("text/html")
-    public void putHtml(String content) {
+    public void putHtml(@PathParam("nombreTabla")String nombreTabla,@PathParam("llave")String llave,@PathParam("datos")String datos) {
+        
+        ArrayList llaveEnviar = new ArrayList();
+        ArrayList datosEnviar = new ArrayList();
+        String[] dat = datos.split("-");
+        
+        for (int i = 0; i < dat.length; i++) {
+            //datosEnviar
+        }
+        llaveEnviar.add("int");
+        llaveEnviar.add("id");
+        llaveEnviar.add(llave);
+        
+        
     }
 
     private static String obtenerRegistros(java.lang.String nombreTabla) {
@@ -56,6 +70,14 @@ public class RegistrosResource {
         webservices.Registros port = service.getRegistrosPort();
         return port.obtenerRegistros(nombreTabla);
     }
+
+    private static Integer editarRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> llave, java.util.List<java.lang.Object> nuevosDatos) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.editarRegistro(nombreTabla, llave, nuevosDatos);
+    }
+    
+    
     
     
     
