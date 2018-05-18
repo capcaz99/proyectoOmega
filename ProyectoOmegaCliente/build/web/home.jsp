@@ -192,7 +192,7 @@
                         datos=datos+document.getElementById(campo).value+"_";
                 }
                 datos = datos+document.getElementById(campo).value;
-                alert(datos);
+                
                
                 target = target+tabla+"/2/"+datos;
                 ajaxRequest.open(method, target, true /*async*/);
