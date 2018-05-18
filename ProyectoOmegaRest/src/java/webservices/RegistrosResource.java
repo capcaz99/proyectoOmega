@@ -49,19 +49,21 @@ public class RegistrosResource {
      */
     @PUT
     @Consumes("text/html")
-    public void putHtml(@PathParam("nombreTabla")String nombreTabla,@PathParam("llave")String llave,@PathParam("datos")String datos) {
+    public String putHtml(@PathParam("nombreTabla")String nombreTabla,@PathParam("llave")String llave,@PathParam("datos")String datos) {
         
         ArrayList llaveEnviar = new ArrayList();
         ArrayList datosEnviar = new ArrayList();
-        String[] dat = datos.split("-");
+        String[] dat = datos.split("_");
+        //0-tipo 1-nombre 2-valor
+        for (int i = 0; i < dat.length; i++) 
+            datosEnviar.add(dat[i]);
+            
         
-        for (int i = 0; i < dat.length; i++) {
-            //datosEnviar
-        }
         llaveEnviar.add("int");
         llaveEnviar.add("id");
         llaveEnviar.add(llave);
         
+        return ""+editarRegistro(nombreTabla,llaveEnviar,datosEnviar);
         
     }
 

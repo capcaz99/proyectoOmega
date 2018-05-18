@@ -312,6 +312,7 @@ public class registros {
                     j++;
                 }
             }
+               json.put("tabla",nombreTabla);
                json.put("nombres", nombres);
                json.put("tipos", tipos);
                json.put("datos", data);

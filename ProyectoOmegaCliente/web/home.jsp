@@ -54,32 +54,35 @@
                         var nombres = JSONObject.nombres;
                         var datos = JSONObject.datos;
                         var tipos = JSONObject.tipos;
-                        var txt = "<table>";
+                        var tabla = JSONObject.tabla;
+                        var txt = "<table id='tabla' name='"+tabla+"'>";
                         var cantidad = datos.length;
                         var medida = cantidad / nombres.length;
-                        var drop = "<select>";
+                        var drop = "<select id='campo'>";
 
                         txt = txt + "<tr>";
                         for (var j = 0; j < nombres.length; j++) {
                             txt = txt + "<th>" + nombres[j] + "</th>";
-                            drop = drop + "<option value='"+nombres[j]+"_"+tipos[j]+"'>"+nombres[j]+"</option>";
+                            drop = drop + "<option value='" + tipos[j]+ "_" + nombres[j]  + "'>" + nombres[j] + "</option>";
                         }
                         txt = txt + "</tr>";
-                        drop = drop+"</select>";
-                        
+                        drop = drop + "</select>";
+
                         for (var k = 0; k < medida; k++) {
                             txt = txt + "<tr>";
-                            for(var r=0; r<nombres.length; r++)
-                                txt = txt + "<th>"+datos[k+(medida*r)]+"</th>";
+                            for (var r = 0; r < nombres.length; r++)
+                                txt = txt + "<th>" + datos[k + (medida * r)] + "</th>";
                             txt = txt + "</tr>";
                         }
-                        
-                        txt = txt+"</table>";
-                        
-                        txt = txt+"<br> Para editar introduce el id y selecciona el campo que quieres cambiar y su nuevo valor<br>"
+
+                        txt = txt + "</table>";
+
+                        txt = txt + "<br> Para editar introduce el id y selecciona el campo que quieres cambiar y su nuevo valor<br>"
                         txt = txt + "ID: <input type='text' id='idCambio'><br>";
-                        txt = txt + "Campo:"+drop+"<br>";
+                        txt = txt + "Campo:" + drop + "<br>";
                         txt = txt + "Nuevo valor: <input type='text' id='nuevoValor'><br>"
+                        var boton = "callEditar('mensaje','PUT','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
+                        txt = txt + "<button onclick="+boton+">Editar</button>";
                         document.getElementById(id).innerHTML = txt;
                     }
                 }
@@ -87,9 +90,36 @@
                 ajaxRequest.setRequestHeader("Content-Type", "text/html");
                 ajaxRequest.send();
             }
-            
-            
-            
+
+
+            function callEditar(id, method, target) {
+                var ajaxRequest;
+                if (window.XMLHttpRequest) {
+                    ajaxRequest = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function () {
+                    if (ajaxRequest.readyState == 4 &&
+                            (ajaxRequest.status == 200 || ajaxRequest.status == 204)) {
+                            if(ajaxRequest.responseText == "0")
+                                document.getElementById(id).innerHTML ="Valor editado, vuelve a obtener datos" ;
+                            else
+                                document.getElementById(id).innerHTML ="Hubo un error, vuelve a intentarlo más tarde" ;
+                    }
+                }
+                
+                var nuevoValor = document.getElementById("nuevoValor").value;
+                var idN = document.getElementById("idCambio").value;
+                var campo = document.getElementById("campo").value;
+                var tabla = document.getElementById("tabla").getAttribute("name");
+                
+                target = target+tabla+"/"+idN+"/"+campo.toLowerCase()+"_"+nuevoValor;
+                ajaxRequest.open(method, target, true /*async*/);
+                ajaxRequest.setRequestHeader("Content-Type", "text/html");
+                ajaxRequest.send();
+            }
+
 
         </script>
 
@@ -108,6 +138,7 @@
         <h2>Las tablas que has creado son: </h2>
         <div id="tablas"></div>
         <div id="registros"></div>
+        <div id="mensaje"></div>
 
     </body>
 </html>
