@@ -51,15 +51,30 @@
                     if (ajaxRequest.readyState == 4 &&
                             (ajaxRequest.status == 200 || ajaxRequest.status == 204)) {
                         var JSONObject = JSON.parse(ajaxRequest.responseText);
+                        var nombres = JSONObject.nombres;
+                        var datos = JSONObject.datos;
                         var txt = "<table>";
-                        for (var i = 0, max = 10; i < max; i++) {
-                             
-    
-                         }
-                        var txt = "field1: " + JSONObject.field0[0] +
-                                " field2: " + JSONObject.field1 +
-                                " field3: " + JSONObject.field2 +
-                                "<br />";
+                        var cantidad = datos.length;
+                        var medida = cantidad / nombres.length;
+
+
+                        txt = txt + "<tr>"
+                        for (var j = 0; j < nombres.length; j++) 
+                            txt = txt + "<th>" + nombres[j] + "</th>";
+                        txt = txt + "</tr>"
+                        
+                        for (var k = 0; k < medida; k++) {
+                            txt = txt + "<tr>";
+                            for(var r=0; r<nombres.length; r++)
+                                txt = txt + "<th>"+datos[k+(medida*r)]+"</th>";
+                            txt = txt + "</tr>";
+                        }
+                        
+                        txt = txt+"</table>";
+
+
+
+
                         document.getElementById(id).innerHTML = txt;
                     }
                 }

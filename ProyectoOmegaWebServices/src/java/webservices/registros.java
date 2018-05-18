@@ -298,18 +298,19 @@ public class registros {
 
             int j = 0;
             String nombre; 
-            
+            ArrayList data = new ArrayList();
+            ArrayList nombres = new ArrayList();
             for (int i = 0; i < numCols; i++) {
                 rs.beforeFirst();
                 nombre = rsmd.getColumnName(i+1);
-                ArrayList arreglo = new ArrayList();
-                arreglo.add(nombre);
+                nombres.add(nombre);
                 while (rs.next()) {
-                    arreglo.add(rs.getString(nombre));
+                    data.add(rs.getString(nombre));
                     j++;
                 }
-                json.put("field"+i, arreglo);
             }
+               json.put("nombres", nombres);
+               json.put("datos", data);
 
             con.close();
 
