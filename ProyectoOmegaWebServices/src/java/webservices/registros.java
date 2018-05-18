@@ -62,7 +62,7 @@ public class registros {
                     case ("char"):
                         QueryString.append("'" + ((String) datosTupla.get(i + 1)) + "'");
                         break;
-                    case ("int"):
+                    case ("integer"):
                         QueryString.append(Integer.parseInt((String) datosTupla.get(i + 1)));
                         break;
                     case ("double"):
@@ -126,7 +126,7 @@ public class registros {
                     case ("char"):
                         QueryString.append("'" + valor3 + "'");
                         break;
-                    case ("int"):
+                    case ("integer"):
                         QueryString.append(Integer.parseInt(valor3));
                         break;
                     case ("double"):
@@ -151,7 +151,7 @@ public class registros {
                 case ("char"):
                     QueryString.append("'" + (String) llave.get(2) + "'");
                     break;
-                case ("int"):
+                case ("integer"):
                     QueryString.append(Integer.parseInt((String) llave.get(2)));
                     break;
                 case ("double"):
@@ -203,7 +203,7 @@ public class registros {
                 case ("char"):
                     QueryString.append("'" + (String) llave.get(2) + "'");
                     break;
-                case ("int"):
+                case ("integer"):
                     QueryString.append(Integer.parseInt((String) llave.get(2)));
                     break;
                 case ("double"):
@@ -298,18 +298,24 @@ public class registros {
 
             int j = 0;
             String nombre; 
-            
+            ArrayList data = new ArrayList();
+            ArrayList nombres = new ArrayList();
+            ArrayList tipos = new ArrayList();
             for (int i = 0; i < numCols; i++) {
                 rs.beforeFirst();
                 nombre = rsmd.getColumnName(i+1);
-                ArrayList arreglo = new ArrayList();
-                arreglo.add(nombre);
+                tipos.add(rsmd.getColumnTypeName(i+1));
+                
+                nombres.add(nombre);
                 while (rs.next()) {
-                    arreglo.add(rs.getString(nombre));
+                    data.add(rs.getString(nombre));
                     j++;
                 }
-                json.put(i, arreglo);
             }
+               json.put("tabla",nombreTabla);
+               json.put("nombres", nombres);
+               json.put("tipos", tipos);
+               json.put("datos", data);
 
             con.close();
 

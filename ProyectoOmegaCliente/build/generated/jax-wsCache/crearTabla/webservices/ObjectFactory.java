@@ -35,19 +35,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Crear }
-     * 
-     */
-    public Crear createCrear() {
-        return new Crear();
-    }
-
-    /**
      * Create an instance of {@link CrearResponse }
      * 
      */
     public CrearResponse createCrearResponse() {
         return new CrearResponse();
+    }
+
+    /**
+     * Create an instance of {@link Crear }
+     * 
+     */
+    public Crear createCrear() {
+        return new Crear();
     }
 
     /**
