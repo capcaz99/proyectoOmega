@@ -9,7 +9,7 @@ Antes de poder correr los proyectos es necesario crear una base de datos llamada
 DBWizard con nombre de usuario y contraseña "root" que contenga dos tablas:
 * Users: Esta tabla debe de contener tres campos username(varchar),
  password(varchar) y userid (integer).
-*Relacion: Esta tabla debe de contener dos campos idusuario(integer) y 
+* Relacion: Esta tabla debe de contener dos campos idusuario(integer) y 
 nombretabla(varchar).
 Despúes de crear esta base de datos se puede continuar con correr el proyecto.
  
