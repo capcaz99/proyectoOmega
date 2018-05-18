@@ -43,10 +43,12 @@ public class tablas {
         
         ArrayList nombres = (ArrayList) obtenerTablasUsuario(userid);
         StringBuilder resultado = new StringBuilder();
-        
-        for (int i = 0; i < nombres.size(); i++) 
+        int i;
+        for (i = 0; i < nombres.size()-1; i++) 
             resultado.append((String) nombres.get(i)+"_");
         
+        resultado.append((String) nombres.get(i));
+
         
         return resultado.toString();
     }
