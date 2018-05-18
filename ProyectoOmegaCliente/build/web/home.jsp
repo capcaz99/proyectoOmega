@@ -26,10 +26,10 @@
                         var resString = ajaxRequest.responseText;
                         var result = resString.split("_");
                         var final = "";
-                        var str="";
+                        var str = "";
                         for (var i = 0; i < result.length; i++) {
-                            str1="callObtener('registros','GET','http://localhost:8080/ProyectoOmegaRest/webresources/registros/"+result[i]+"')";
-                            final = final + result[i] + "<button onclick="+str1+">Ver registros</button><br>";
+                            str1 = "callObtener('registros','GET','http://localhost:8080/ProyectoOmegaRest/webresources/registros/" + result[i] + "')";
+                            final = final + result[i] + "<button onclick=" + str1 + ">Ver registros</button><br>";
                         }
                         alert(final);
                         document.getElementById(id).innerHTML = final;
@@ -50,7 +50,17 @@
                 ajaxRequest.onreadystatechange = function () {
                     if (ajaxRequest.readyState == 4 &&
                             (ajaxRequest.status == 200 || ajaxRequest.status == 204)) {
-                        document.getElementById(id).innerHTML = ajaxRequest.responseText;
+                        var JSONObject = JSON.parse(ajaxRequest.responseText);
+                        var txt = "<table>";
+                        for (var i = 0, max = 10; i < max; i++) {
+                             
+    
+                         }
+                        var txt = "field1: " + JSONObject.field0[0] +
+                                " field2: " + JSONObject.field1 +
+                                " field3: " + JSONObject.field2 +
+                                "<br />";
+                        document.getElementById(id).innerHTML = txt;
                     }
                 }
                 ajaxRequest.open(method, target, true /*async*/);

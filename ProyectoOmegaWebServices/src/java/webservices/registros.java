@@ -308,7 +308,7 @@ public class registros {
                     arreglo.add(rs.getString(nombre));
                     j++;
                 }
-                json.put(i, arreglo);
+                json.put("field"+i, arreglo);
             }
 
             con.close();
