@@ -13,6 +13,7 @@
     </head>
     <body>
         <h1>Create a new Table!</h1> 
+        <a href="home.jsp">Inicio</a>
         <br>
         <label> Table name </label>
         <br>
@@ -48,102 +49,111 @@
         <label> Not null </label>
         <input type="checkbox" name="Not null" value="" id ="not_null"/>
         <br>
-        <input type="submit" value="send" id="send_value" onclick ="callRESTfulWebService('result',POST,,btnTry().toString())" />
+        <input type="submit" value="send" id="send_value" onclick ="callRESTfulWebService('result', 'POST', 'http://localhost:8080/ProyectoOmegaRest/webresources/tablas/', btnTry().toString())" />
         <input type="submit" value="add file" id="field_name_btn" onclick ="btnAddField_Click()" />
 
 
         <script>
-            function callRESTfulWebService(id, method, target, msg) {
-            var ajaxRequest;
-            if (window.XMLHttpRequest){
-            ajaxRequest=new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
-            } else {
-            ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
-            }
-            ajaxRequest.onreadystatechange = function(){
-            if (ajaxRequest.readyState==4 &&
-            (ajaxRequest.status==200 || ajaxRequest.status==204)){
-            document.getElementById(id).innerHTML=ajaxRequest.responseText;
-            }
-            }
-             ajaxRequest.open(method, target, true /*async*/);
-             ajaxRequest.setRequestHeader("Content-Type", "text/html");
-             ajaxRequest.send(msg);
-             }
-             
-            var table = new Object();
-            table.field_names = "";
-            table.types ="";
-            table.charact = "";
-            document.getElementById("varchar_length").style.visibility = "hidden";
-            document.getElementById("varchar_length_lbl").style.visibility = "hidden";
+                    function callRESTfulWebService(id, method, target, msg) {
+                    var ajaxRequest;
+                            if (window.XMLHttpRequest){
+                    ajaxRequest = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                    } else {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                    }
+                    ajaxRequest.onreadystatechange = function(){
+                    if (ajaxRequest.readyState == 4 &&
+                            (ajaxRequest.status == 200 || ajaxRequest.status == 204)){
+                        if(ajaxRequest.responseText == "0")
+                        document.getElementById(id).innerHTML ="Tabla creada" ;
+                    else
+                         document.getElementById(id).innerHTML ="Ocurrió un error, vuelve a intentarlo" ;
+                    }
+                    }
+                    target = target+msg;
+                    ajaxRequest.open(method, target, true /*async*/);
+                    ajaxRequest.setRequestHeader("Content-Type", "text/html");
+                    ajaxRequest.send();
+                    }
 
-            function unique_Click() {
-                if (document.getElementById("unique").checked === true) {
+            var table = new Object();
+                    table.field_names = "";
+                    table.types = "";
+                    table.charact = "";
+                    document.getElementById("varchar_length").style.visibility = "hidden";
+                    document.getElementById("varchar_length_lbl").style.visibility = "hidden";
+                    function unique_Click() {
+                    if (document.getElementById("unique").checked === true) {
                     return ("-u");
-                } else
-                    return ("--");
-            }
+                    } else
+                            return ("--");
+                    }
 
             function not_null_Click() {
-                if (document.getElementById("not_null").checked === true) {
-                    return (unique_Click().toString() + "n");
-                } else
+            if (document.getElementById("not_null").checked === true) {
+            return (unique_Click().toString() + "n");
+            } else
                     return (unique_Click().toString() + "-");
             }
 
             function all_charact() {
-                if (document.getElementById("primary_key").checked === true)
+            if (document.getElementById("primary_key").checked === true)
                     return ("p--");
-                else
+                    else
                     return not_null_Click().toString();
             }
 
             function show_varchar_opt() {
-                if (document.getElementById("type").value === "varchar") {
-                    document.getElementById("varchar_length").style.visibility = "visible";
+            if (document.getElementById("type").value === "varchar") {
+            document.getElementById("varchar_length").style.visibility = "visible";
                     document.getElementById("varchar_length_lbl").style.visibility = "visible";
-                } else {
+            } else {
 
-                    document.getElementById("varchar_length").style.visibility = "hidden";
+            document.getElementById("varchar_length").style.visibility = "hidden";
                     document.getElementById("varchar_length_lbl").style.visibility = "hidden";
                     document.getElementById("varchar_length").value = "0";
-                }
+            }
             }
 
             function type_varch() {
-                length_v = Number(document.getElementById("varchar_length").value.toString());
-                if (length_v !== 0)
+            length_v = Number(document.getElementById("varchar_length").value.toString());
+                    if (length_v !== 0)
                     return all_charact().toString() + length_v;
-                else
+                    else
                     return all_charact().toString();
             }
 
 
             function btnAddField_Click() {
-                var lbl = document.createElement("LABEL");
-                var fn = document.createTextNode(document.getElementById('field_name').value.toString() + " ");
-                var t = document.createTextNode(document.getElementById('type').value.toString() + " " + type_varch().toString());
-                var br = document.createElement("br");
-                lbl.appendChild(fn);
-                lbl.appendChild(t);
-                document.body.appendChild(br);
-                document.body.appendChild(lbl);
-                table.field_names = table.field_names + document.getElementById('field_name').value.toString()+" ";
-                table.types = table.types + document.getElementById('type').value.toString()+" ";
-                table.charact = table.charact + type_varch().toString()+" ";
+            var lbl = document.createElement("LABEL");
+                    var fn = document.createTextNode(document.getElementById('field_name').value.toString() + "_");
+                    var t = document.createTextNode(document.getElementById('type').value.toString() + "_" + type_varch().toString());
+                    var br = document.createElement("br");
+                    lbl.appendChild(fn);
+                    lbl.appendChild(t);
+                    document.body.appendChild(br);
+                    document.body.appendChild(lbl);
+                    table.field_names = table.field_names + document.getElementById('field_name').value.toString()+"_";
+                    table.types = table.types + document.getElementById('type').value.toString()+"_";
+                    table.charact = table.charact + type_varch().toString()+"_" ;
             }
-            
+
             function btnTry(){
-                return (Number(document.getElementById('number_fields').value.toString()) " nombre_tabla: "+ document.getElementById('table_name').value.toString() + )
-                        " nombres: "+ table.field_names + " tipos: " + table.types + " caract: "+ table.charact);
+                return(document.getElementById('userid').value.toString()+"_"+Number(document.getElementById('number_fields').value.toString())+ "_" + document.getElementById('table_name').value.toString() + 
+                    "_nombres:_" + table.field_names + "tipos:_" + table.types + "caract:_" + table.charact.substring(0,table.charact.length-1));
+            
             }
 
         </script>
+        <%
+        HttpSession mySession = request.getSession();
+        String userid = (String) mySession.getAttribute("userid");
+        %>
         <br>
         <div id = "result"> </div>
+        <input type="hidden" id='userid' value="<%=userid%>"></input>
         <label >  </label>
-        <a href="home.jsp">Inicio</a>
+        
         <!--<label id = "type_rdy">  </label>
         <label id = "charact_key_rdy"> </label>
         --!>

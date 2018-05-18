@@ -2,4 +2,6 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/registros/registros?WSDL" uri="wsdl/localhost_8080/registros/registros.wsdl"/>
     <system systemId="http://localhost:8080/registros/registros?xsd=1" uri="wsdl/localhost_8080/registros/registros.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/crearTabla/crearTabla?WSDL" uri="wsdl/localhost_8080/crearTabla/crearTabla.wsdl"/>
+    <system systemId="http://localhost:8080/crearTabla/crearTabla?xsd=1" uri="wsdl/localhost_8080/crearTabla/crearTabla.xsd_1.xsd"/>
 </catalog>

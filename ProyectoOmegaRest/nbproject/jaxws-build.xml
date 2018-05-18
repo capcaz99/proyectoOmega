@@ -42,5 +42,21 @@
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
         <delete dir="${build.generated.dir}/jax-wsCache/registros"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-registros"/>
+    <target name="wsimport-client-crearTabla" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/crearTabla"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/crearTabla" destdir="${build.generated.dir}/jax-wsCache/crearTabla" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/crearTabla/wsdl/localhost_8080/crearTabla/crearTabla.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/crearTabla/crearTabla?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/crearTabla/wsdl/localhost_8080/crearTabla/crearTabla.wsdl"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/crearTabla"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/crearTabla">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-crearTabla" depends="-init-project">
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+        <delete dir="${build.generated.dir}/jax-wsCache/crearTabla"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-registros, wsimport-client-crearTabla"/>
 </project>

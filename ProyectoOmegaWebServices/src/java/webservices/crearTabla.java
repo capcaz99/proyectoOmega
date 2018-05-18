@@ -84,7 +84,7 @@ public class crearTabla {
             con.commit();
             con.close();
             
-            return 1;
+            return 0;
             
         } catch (SQLException ex) {
             Logger.getLogger(crearTabla.class.getName()).log(Level.SEVERE, null, ex);
