@@ -135,13 +135,15 @@
             }
             
             function btnTry(){
-                return ( " nombres: "+ table.field_names + " tipos: " + table.types + " caract: "+ table.charact);
+                return (Number(document.getElementById('number_fields').value.toString()) " nombre_tabla: "+ document.getElementById('table_name').value.toString() + )
+                        " nombres: "+ table.field_names + " tipos: " + table.types + " caract: "+ table.charact);
             }
 
         </script>
         <br>
         <div id = "result"> </div>
         <label >  </label>
+        <a href="home.jsp">Inicio</a>
         <!--<label id = "type_rdy">  </label>
         <label id = "charact_key_rdy"> </label>
         --!>

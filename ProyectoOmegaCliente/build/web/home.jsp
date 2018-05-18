@@ -215,6 +215,7 @@
 
         <h1>Bienvenido <%= username%></h1>
         <button onclick="<%= funcion%>">Ver Tablas creadas</button>
+        <a href="createTablePage.jsp">Agregar nueva tabla</a>
         <h2>Las tablas que has creado son: </h2>
         <div id="tablas"></div>
         <div id="registros"></div>
