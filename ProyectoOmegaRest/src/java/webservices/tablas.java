@@ -40,15 +40,15 @@ public class tablas {
     @GET
     @Produces("text/html")
     public String getXml(@PathParam("userid")String userid) {
-        //@QueryParam("userid")String userid
-//        ArrayList nombres = (ArrayList) obtenerTablasUsuario(userid);
-//        String[] resultado = new String[nombres.size()];
-//        
-//        for (int i = 0; i < nombres.size(); i++) 
-//            resultado[i] = (String) nombres.get(i);
-//        
-//        return resultado;
-        return "hola "+userid;
+        
+        ArrayList nombres = (ArrayList) obtenerTablasUsuario(userid);
+        StringBuilder resultado = new StringBuilder();
+        
+        for (int i = 0; i < nombres.size(); i++) 
+            resultado.append((String) nombres.get(i)+"_");
+        
+        
+        return resultado.toString();
     }
 
     /**
