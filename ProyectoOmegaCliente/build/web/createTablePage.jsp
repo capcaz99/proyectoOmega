@@ -14,7 +14,7 @@
     <body>
         <h1>Create a new Table!</h1> 
         <br>
-        <label> Tablename </label>
+        <label> Table name </label>
         <br>
         <input type="text" name="table_name" value="" id="table_name"/>
         <br>
@@ -39,9 +39,13 @@
         <br>
         <input type="text" name="varchar_length" value="" id ="varchar_length" />
         <br>
-        <label> Characteristics </label>
+        <label> Characteristics: </label>
+        <br>
+        <label> Primary key </label>
         <input type="checkbox" name="Primary Key" value="" id ="primary_key" />
+        <label> Unique </label>
         <input type="checkbox" name="Unique" value="" id ="unique"/>
+        <label> Not null </label>
         <input type="checkbox" name="Not null" value="" id ="not_null"/>
         <br>
         <input type="submit" value="remove  field" id="remove_value" />
@@ -94,30 +98,27 @@
              else
             return all_charact().toString();
             }
-            
-          /*  function charact_final(){
-                fin = type_varch().toString();
-                if (if Number(fin.indexOf(fin.length()-1))===0){
-                    return all_charact().toString(); 
-                }
-                else
-                    return type_varch().toString();
-            }*/
-           
 
 
-            function btnAddField_Click() {
-            document.getElementById('field_name_rdy').innerHTML = document.getElementById('field_name').value;
-            document.getElementById('charact_key_rdy').innerHTML = type_varch().toString();
+            function btnAddField_Click() {  
+            var lbl = document.createElement("LABEL");       
+            var fn = document.createTextNode(document.getElementById('field_name').value.toString()+" ");
+            var t = document.createTextNode(document.getElementById('type').value.toString()+" "+type_varch().toString());
+            var br = document.createElement("br");
+            lbl.appendChild(fn);
+            lbl.appendChild(t);
+            document.body.appendChild(br);                   
+            document.body.appendChild(lbl);
             }
+            
 
 
         </script>
         <br>
-        <label id = "field_name_rdy">  </label>
-        <label id = "type_rdy">  </label>
+        <label> </label>
+        <!--<label id = "type_rdy">  </label>
         <label id = "charact_key_rdy"> </label>
-
+        --!>
 
 
 
