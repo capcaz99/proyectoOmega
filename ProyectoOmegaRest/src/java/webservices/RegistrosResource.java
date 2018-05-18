@@ -10,6 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -41,6 +42,17 @@ public class RegistrosResource {
     public String getHtml(@PathParam("nombreTabla")String nombreTabla) {
         return obtenerRegistros(nombreTabla);
     }
+    
+    @DELETE
+    @Produces("text/html")
+    public String deleteHtml(@PathParam("nombreTabla")String nombreTabla,@PathParam("llave")String llave) {
+        ArrayList llaveEnviar = new ArrayList();
+        llaveEnviar.add("int");
+        llaveEnviar.add("id");
+        llaveEnviar.add(llave);
+        return ""+eliminarRegistro(nombreTabla,llaveEnviar);
+    }
+    
 
     /**
      * PUT method for updating or creating an instance of RegistrosResource
@@ -78,6 +90,14 @@ public class RegistrosResource {
         webservices.Registros port = service.getRegistrosPort();
         return port.editarRegistro(nombreTabla, llave, nuevosDatos);
     }
+
+    private static Integer eliminarRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> lave) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.eliminarRegistro(nombreTabla, lave);
+    }
+    
+    
     
     
     

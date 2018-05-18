@@ -74,15 +74,23 @@
                                 txt = txt + "<th>" + datos[k + (medida * r)] + "</th>";
                             txt = txt + "</tr>";
                         }
+                        
+                        txt = txt +"<tr>"
+                        for (var r = 0; r < nombres.length; r++)
+                                txt = txt + "<th><input type='text' id='campo"+r"'></th>";
 
                         txt = txt + "</table>";
 
                         txt = txt + "<br> Para editar introduce el id y selecciona el campo que quieres cambiar y su nuevo valor<br>"
+                        txt = txt + "<br>Si quieres eliminar un registro introduce unicamente el id del mismo sin importar los demás campos<br>"
                         txt = txt + "ID: <input type='text' id='idCambio'><br>";
                         txt = txt + "Campo:" + drop + "<br>";
                         txt = txt + "Nuevo valor: <input type='text' id='nuevoValor'><br>"
                         var boton = "callEditar('mensaje','PUT','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
                         txt = txt + "<button onclick="+boton+">Editar</button>";
+                        var boton = "callEliminar('mensaje','DELETE','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
+                        txt = txt + "<button onclick="+boton+">Eliminar</button>";
+                       
                         document.getElementById(id).innerHTML = txt;
                     }
                 }
@@ -115,6 +123,34 @@
                 var tabla = document.getElementById("tabla").getAttribute("name");
                 
                 target = target+tabla+"/"+idN+"/"+campo.toLowerCase()+"_"+nuevoValor;
+                ajaxRequest.open(method, target, true /*async*/);
+                ajaxRequest.setRequestHeader("Content-Type", "text/html");
+                ajaxRequest.send();
+            }
+            
+            function callEliminar(id, method, target) {
+                var ajaxRequest;
+                if (window.XMLHttpRequest) {
+                    ajaxRequest = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function () {
+                    if (ajaxRequest.readyState == 4 &&
+                            (ajaxRequest.status == 200 || ajaxRequest.status == 204)) {
+                            if(ajaxRequest.responseText == "0")
+                                document.getElementById(id).innerHTML ="Valor eliminado, vuelve a obtener datos" ;
+                            else
+                                document.getElementById(id).innerHTML ="Hubo un error, vuelve a intentarlo más tarde" ;
+                    }
+                }
+                
+                
+                var idN = document.getElementById("idCambio").value;
+                
+                var tabla = document.getElementById("tabla").getAttribute("name");
+                
+                target = target+tabla+"/"+idN+"/2";
                 ajaxRequest.open(method, target, true /*async*/);
                 ajaxRequest.setRequestHeader("Content-Type", "text/html");
                 ajaxRequest.send();
