@@ -14,11 +14,11 @@
     <body>
         <h1>Create a new Table!</h1> 
         <br>
-        <label> Tablename </label>
+        <label> Table name </label>
         <br>
         <input type="text" name="table_name" value="" id="table_name"/>
         <br>
-        <label id="hello"> How many fields </label>
+        <label> How many fields </label>
         <br>
         <input type="text" name="number_fields" value="" id="number_fields"/>
         <br>
@@ -27,7 +27,7 @@
         <input type="text" name="field_name" value="" id="field_name"/>
         <br>
         <label> type </label>
-        <select name="type" id = "type">
+        <select name="type" id = "type" onclick="show_varchar_opt()">
             <option>boolean</option>
             <option>varchar</option>
             <option>integer</option>
@@ -35,77 +35,118 @@
             <option>char</option>
         </select>
         <br>
-        <label> Characteristics </label>
+        <label id="varchar_length_lbl"> varchar length </label>
+        <br>
+        <input type="text" name="varchar_length" value="" id ="varchar_length" />
+        <br>
+        <label> Characteristics: </label>
+        <br>
+        <label> Primary key </label>
         <input type="checkbox" name="Primary Key" value="" id ="primary_key" />
+        <label> Unique </label>
         <input type="checkbox" name="Unique" value="" id ="unique"/>
+        <label> Not null </label>
         <input type="checkbox" name="Not null" value="" id ="not_null"/>
         <br>
-        <input type="submit" value="remove  field" id="remove_value" />
-        
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Field_Name</th>
-                    <th>Type</th>
-                    <th>Primary_Key</th>
-                    <th>Unique</th>
-                    <th>Not_Null</th>
-                </tr>
-            </thead>
-            <tbody>
+        <input type="submit" value="send" id="send_value" onclick ="callRESTfulWebService('result',POST,,btnTry().toString())" />
+        <input type="submit" value="add file" id="field_name_btn" onclick ="btnAddField_Click()" />
 
-            </tbody>
-        </table>
 
-        
         <script>
-            var tabla = document.getElementById('table_data');
-          //  document.getElementById('field_name').innerHTML = "alo";
-            //var txtField_name = document.getElementById('field_name').innerHTML;
-            var number_fields = document.getElementById('number_fields').innerHTML;
-            var ddlType = document.getElementById('type').innerHTML;
-            var btnAdd = document.getElementById('add_value').innerHTML;
-            var btnRm = document.getElementById('remove_value').innerHTML;
-            var primary_key = document.getElementById('primary_key').innerHTML;
-            var unique = document.getElementById('unique').innerHTML;
-            var not_null = document.getElementById('not_null').innerHTML;
-            var datos = [];
-          
-    
-           function btnAdd_Click(id) {
-               document.getElementById(id).setText("alo");}
-                 
-              /*  var field_name= txtField_name.value || '';
-                var type = ddlType.value || '';
-                 
-                 if (!field_name || !field_name.trim().length) {
-                alert('El campo debe tener un nombre');
-                return;
-                
-                 txtField_name.value = '';
-                 txtField_name.focus();
-                 
-                var item = {
-                field_name: field_name.trim(),
-                type: type,
-                primary_key: primary_key,
-                unique: unique,
-                not_null: not_null
-                 };
+            function callRESTfulWebService(id, method, target, msg) {
+            var ajaxRequest;
+            if (window.XMLHttpRequest){
+            ajaxRequest=new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+            } else {
+            ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+            }
+            ajaxRequest.onreadystatechange = function(){
+            if (ajaxRequest.readyState==4 &&
+            (ajaxRequest.status==200 || ajaxRequest.status==204)){
+            document.getElementById(id).innerHTML=ajaxRequest.responseText;
+            }
+            }
+             ajaxRequest.open(method, target, true /*async*/);
+             ajaxRequest.setRequestHeader("Content-Type", "text/html");
+             ajaxRequest.send(msg);
+             }
+             
+            var table = new Object();
+            table.field_names = "";
+            table.types ="";
+            table.charact = "";
+            document.getElementById("varchar_length").style.visibility = "hidden";
+            document.getElementById("varchar_length_lbl").style.visibility = "hidden";
 
-            datos.push(item);
-                
-    }
+            function unique_Click() {
+                if (document.getElementById("unique").checked === true) {
+                    return ("-u");
+                } else
+                    return ("--");
+            }
 
-}  */
+            function not_null_Click() {
+                if (document.getElementById("not_null").checked === true) {
+                    return (unique_Click().toString() + "n");
+                } else
+                    return (unique_Click().toString() + "-");
+            }
+
+            function all_charact() {
+                if (document.getElementById("primary_key").checked === true)
+                    return ("p--");
+                else
+                    return not_null_Click().toString();
+            }
+
+            function show_varchar_opt() {
+                if (document.getElementById("type").value === "varchar") {
+                    document.getElementById("varchar_length").style.visibility = "visible";
+                    document.getElementById("varchar_length_lbl").style.visibility = "visible";
+                } else {
+
+                    document.getElementById("varchar_length").style.visibility = "hidden";
+                    document.getElementById("varchar_length_lbl").style.visibility = "hidden";
+                    document.getElementById("varchar_length").value = "0";
+                }
+            }
+
+            function type_varch() {
+                length_v = Number(document.getElementById("varchar_length").value.toString());
+                if (length_v !== 0)
+                    return all_charact().toString() + length_v;
+                else
+                    return all_charact().toString();
+            }
+
+
+            function btnAddField_Click() {
+                var lbl = document.createElement("LABEL");
+                var fn = document.createTextNode(document.getElementById('field_name').value.toString() + " ");
+                var t = document.createTextNode(document.getElementById('type').value.toString() + " " + type_varch().toString());
+                var br = document.createElement("br");
+                lbl.appendChild(fn);
+                lbl.appendChild(t);
+                document.body.appendChild(br);
+                document.body.appendChild(lbl);
+                table.field_names = table.field_names + document.getElementById('field_name').value.toString()+" ";
+                table.types = table.types + document.getElementById('type').value.toString()+" ";
+                table.charact = table.charact + type_varch().toString()+" ";
+            }
             
-            
+            function btnTry(){
+                return ( " nombres: "+ table.field_names + " tipos: " + table.types + " caract: "+ table.charact);
+            }
+
         </script>
-       <input type="submit" value="add file" id="field_name_btn" onclick ="btnAdd_Click('field_name')" />
-        
-        
-        
-        
-        
+        <br>
+        <div id = "result"> </div>
+        <label >  </label>
+        <!--<label id = "type_rdy">  </label>
+        <label id = "charact_key_rdy"> </label>
+        --!>
+
+
+
     </body>
 </html>
