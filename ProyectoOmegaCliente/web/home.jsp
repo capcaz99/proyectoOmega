@@ -31,7 +31,7 @@
                             str1 = "callObtener('registros','GET','http://localhost:8080/ProyectoOmegaRest/webresources/registros/" + result[i] + "/1/1')";
                             final = final + result[i] + "<button onclick=" + str1 + ">Ver registros</button><br>";
                         }
-                        alert(final);
+                        
                         document.getElementById(id).innerHTML = final;
                     }
                 }
@@ -76,19 +76,25 @@
                         }
                         
                         txt = txt +"<tr>"
-                        for (var r = 0; r < nombres.length; r++)
-                                txt = txt + "<th><input type='text' id='campo"+r"'></th>";
-
+                        var campo;
+                        for (var r = 0; r < nombres.length; r++){
+                                campo = "campo"+r;
+                                txt = txt + "<th><input type='text' name='"+tipos[r]+"' id='"+campo+"'></th>";
+                            }
+                        txt = txt + "</tr>";
+                        txt = txt + "<input type='hidden' id='cuenta' name='"+nombres.length+"'>";
                         txt = txt + "</table>";
-
+                        txt = txt +"<br>Para agregar rellena los cuadros de texto<br>";
+                        var boton = "callAgregar('mensaje','POST','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
+                        txt = txt +"<button onclick="+boton+">Agregar</button>";
                         txt = txt + "<br> Para editar introduce el id y selecciona el campo que quieres cambiar y su nuevo valor<br>"
                         txt = txt + "<br>Si quieres eliminar un registro introduce unicamente el id del mismo sin importar los demás campos<br>"
                         txt = txt + "ID: <input type='text' id='idCambio'><br>";
                         txt = txt + "Campo:" + drop + "<br>";
                         txt = txt + "Nuevo valor: <input type='text' id='nuevoValor'><br>"
-                        var boton = "callEditar('mensaje','PUT','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
+                        boton = "callEditar('mensaje','PUT','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
                         txt = txt + "<button onclick="+boton+">Editar</button>";
-                        var boton = "callEliminar('mensaje','DELETE','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
+                        boton = "callEliminar('mensaje','DELETE','http://localhost:8080/ProyectoOmegaRest/webresources/registros/')";
                         txt = txt + "<button onclick="+boton+">Eliminar</button>";
                        
                         document.getElementById(id).innerHTML = txt;
@@ -151,6 +157,44 @@
                 var tabla = document.getElementById("tabla").getAttribute("name");
                 
                 target = target+tabla+"/"+idN+"/2";
+                ajaxRequest.open(method, target, true /*async*/);
+                ajaxRequest.setRequestHeader("Content-Type", "text/html");
+                ajaxRequest.send();
+            }
+            
+            function callAgregar(id, method, target) {
+                var ajaxRequest;
+                if (window.XMLHttpRequest) {
+                    ajaxRequest = new XMLHttpRequest(); // IE7+, Firefox, Chrome, Opera, Safari
+                } else {
+                    ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+                }
+                ajaxRequest.onreadystatechange = function () {
+                    if (ajaxRequest.readyState == 4 &&
+                            (ajaxRequest.status == 200 || ajaxRequest.status == 204)) {
+                            if(ajaxRequest.responseText == "0")
+                                document.getElementById(id).innerHTML ="Valor agregado, vuelve a obtener datos" ;
+                            else
+                                document.getElementById(id).innerHTML ="Hubo un error, vuelve a intentarlo más tarde" ;
+                    }
+                }
+                
+                
+                var idN = document.getElementById("idCambio").value;
+                var tabla = document.getElementById("tabla").getAttribute("name");
+                var cantidad = parseInt(document.getElementById("cuenta").getAttribute("name"));
+                var datos="";
+                var campo;
+                for (var i = 0; i < cantidad; i++) {
+                    campo="campo"+i;
+                    datos=datos+document.getElementById(campo).getAttribute("name").toLowerCase()+"_";
+                    if(i+1 != cantidad)
+                        datos=datos+document.getElementById(campo).value+"_";
+                }
+                datos = datos+document.getElementById(campo).value;
+                alert(datos);
+               
+                target = target+tabla+"/2/"+datos;
                 ajaxRequest.open(method, target, true /*async*/);
                 ajaxRequest.setRequestHeader("Content-Type", "text/html");
                 ajaxRequest.send();

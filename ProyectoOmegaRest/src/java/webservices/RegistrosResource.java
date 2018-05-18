@@ -11,6 +11,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -51,6 +52,18 @@ public class RegistrosResource {
         llaveEnviar.add("id");
         llaveEnviar.add(llave);
         return ""+eliminarRegistro(nombreTabla,llaveEnviar);
+    }
+    
+    @POST
+    @Produces("text/html")
+    public String postHtml(@PathParam("nombreTabla")String nombreTabla, @PathParam("datos")String datos) {
+        ArrayList datosEnviar = new ArrayList();
+        String[] dat = datos.split("_");
+        //0-tipo 1-VALOR
+        for (int i = 0; i < dat.length; i++) 
+            datosEnviar.add(dat[i]);
+        System.out.println("---------tamdatos--------:"+dat.length);
+        return ""+crearRegistro(nombreTabla,datosEnviar);
     }
     
 
@@ -96,6 +109,14 @@ public class RegistrosResource {
         webservices.Registros port = service.getRegistrosPort();
         return port.eliminarRegistro(nombreTabla, lave);
     }
+
+    private static Integer crearRegistro(java.lang.String nombreTabla, java.util.List<java.lang.Object> datosTupla) {
+        webservices.Registros_Service service = new webservices.Registros_Service();
+        webservices.Registros port = service.getRegistrosPort();
+        return port.crearRegistro(nombreTabla, datosTupla);
+    }
+    
+    
     
     
     

@@ -62,7 +62,7 @@ public class registros {
                     case ("char"):
                         QueryString.append("'" + ((String) datosTupla.get(i + 1)) + "'");
                         break;
-                    case ("int"):
+                    case ("integer"):
                         QueryString.append(Integer.parseInt((String) datosTupla.get(i + 1)));
                         break;
                     case ("double"):
@@ -126,7 +126,7 @@ public class registros {
                     case ("char"):
                         QueryString.append("'" + valor3 + "'");
                         break;
-                    case ("int"):
+                    case ("integer"):
                         QueryString.append(Integer.parseInt(valor3));
                         break;
                     case ("double"):
@@ -151,7 +151,7 @@ public class registros {
                 case ("char"):
                     QueryString.append("'" + (String) llave.get(2) + "'");
                     break;
-                case ("int"):
+                case ("integer"):
                     QueryString.append(Integer.parseInt((String) llave.get(2)));
                     break;
                 case ("double"):
@@ -203,7 +203,7 @@ public class registros {
                 case ("char"):
                     QueryString.append("'" + (String) llave.get(2) + "'");
                     break;
-                case ("int"):
+                case ("integer"):
                     QueryString.append(Integer.parseInt((String) llave.get(2)));
                     break;
                 case ("double"):
